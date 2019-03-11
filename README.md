@@ -1,4 +1,4 @@
-# landmetrics
+# lconnect
 Simple tools to derive landscape connectivity metrics
 
 The objective of this package is to provide the simplest possible approach to derive landscape connectivity metrics.
