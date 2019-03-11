@@ -1,4 +1,14 @@
-
+#' descricao da funcao que aparece no inicio do documento de apoio da funcao
+#' @title
+#' @description
+#' @param landscape Landscape object produced by upload.landscape
+#' @param metric Landscape metrics to be computed
+#' @usage l.metric (landscape, metric)
+#' @return que valores a funcao retorna
+#' @examples exemplos de aplicacao com dados fornecidos pelo package
+#' @references artigos em que se baseia a funcao
+#' @author Frederico Mestre
+#' @export
 l.metric <- function (landscape, metric) {
 # landscape object produced by upload.landscape
 # metric - landscape metrics to be computed

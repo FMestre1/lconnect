@@ -1,4 +1,14 @@
-#leave one patch out at a time to derive patch relevance to overall connectivity
+#' Leave one patch out at a time to derive patch relevance to overall connectivity
+#' @title
+#' @description
+#' @param landscape Landscape object produced by upload.landscape
+#' @param metric Landscape metric to use in the prioritization
+#' @usage patch.imp (landscape, metric)
+#' @return que valores a funcao retorna
+#' @examples exemplos de aplicacao com dados fornecidos pelo package
+#' @references artigos em que se baseia a funcao
+#' @author Frederico Mestre
+#' @export
 
 patch.imp <- function(landscape, metric)
 {
