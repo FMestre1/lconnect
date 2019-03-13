@@ -13,7 +13,11 @@ l.metric <- function (landscape, metric) {
 # landscape object produced by upload.landscape
 # metric - landscape metrics to be computed
 
-#faltam as fórmulas e algum código antes das métricas
+  if (class(rl)!="lconnect")#nao sei se lhe vais dar este nome 
+  {
+    stop(paste(rl, " should be an object of class class 'lconnect'.", sep=""), call. = FALSE)
+  }
+  
 
 #create result vector
 result <- c()
