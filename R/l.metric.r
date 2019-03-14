@@ -1,4 +1,4 @@
-#' descricao da funcao que aparece no in icio do documento de apoio da funcao
+#' descricao da funcao que aparece no inicio do documento de apoio da funcao
 #' @title
 #' @description
 #' @param landscape Landscape object produced by upload.landscape
