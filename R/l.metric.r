@@ -16,7 +16,7 @@ l.metric <- function (landscape,dist_min, metric) {
   # landscape object produced by upload.landscape
   # metric - landscape metrics to be computed
   
-  if (class(rl)!="lconnect") 
+  if (class(landscape)!="lconnect") 
   {
     stop(paste(rl, " should be an object of class class 'lconnect'.", sep=""), call. = FALSE)
   }
@@ -70,7 +70,6 @@ l.metric <- function (landscape,dist_min, metric) {
   if("CCP" %in% metric)
   {
     #number of components
-    
     grouping <- hclust(distance, "single")
     clusters <- cutree(grouping, h=dist_min)
     df0 <- data.frame(landscape$area_c, clusters)
@@ -84,10 +83,8 @@ l.metric <- function (landscape,dist_min, metric) {
       r0[i] <- (ci/Ac)^2
     }
     result <- c(result, CCP = sum (r0))
-    
   }
-  result <- c(result, CCP = sum (r0))#has to be corrected
-  
+
   #LCP
   if("LCP" %in% metric)
   {
@@ -108,8 +105,8 @@ l.metric <- function (landscape,dist_min, metric) {
   #CPL
   if("CPL" %in% metric)
   {
+
   }
-  result <- c(result, CPL = mean(m0,na.rm=TRUE))
   
   #ECS
   if("ECS" %in% metric)
@@ -126,33 +123,30 @@ l.metric <- function (landscape,dist_min, metric) {
       ci <- sum(df1[,1])
       r0[i] <- ci^2
     }
+    result <- c(result, ECS = sum(r0)/Ac)
+    
   }
-  result <- c(result, ECS = sum(r0)/Ac)
   
   #AWF
   if("AWF" %in% metric)
   {
   }
-  result <- c(result, AWF = (sum(paths[, 3]*paths[, 4]*paths[, 5])))
-  
+
   #IIC
   if("IIC" %in% metric)
   {
   }
-  result <- c(result, IIC = sum(paths[, 6])/Al2)
-  
+
   #PC
   if("PC" %in% metric)
   {
   }
-  result <- c(result, PC = (PCnum/Al2^2))
-  
+
   #ECA
   if("ECA" %in% metric)
   {
   }
-  result <- c(result, ECA = EC)
-  
+
   #provide results
   return(round(result,5))
 }
