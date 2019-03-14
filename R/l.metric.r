@@ -1,12 +1,9 @@
 #' l.metric
-<<<<<<< HEAD
 #' @title 
 #' @description
 #' Compute connectivity metrics
-=======
 #' @title Landscape connectivity metrics
 #' @description Calculates several landscape connectivity metrics
->>>>>>> 7f3c10c10d4b5903f9c6271cb82c53f75a4037e5
 #' @param landscape Landscape object produced by upload.landscape
 #' @param metric Landscape metrics to be computed
 #' @usage l.metric (landscape, metric)
