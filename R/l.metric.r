@@ -1,6 +1,7 @@
-#' descricao da funcao que aparece no in icio do documento de apoio da funcao
-#' @title
+#' l.metric
+#' @title 
 #' @description
+#' Compute connectivity metrics
 #' @param landscape Landscape object produced by upload.landscape
 #' @param metric Landscape metrics to be computed
 #' @usage l.metric (landscape, metric)

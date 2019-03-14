@@ -1,6 +1,8 @@
-#' Leave one patch out at a time to derive patch relevance to overall connectivity
+#' patch.importance
 #' @title
 #' @description
+#' Patch prioritization according to individual patch contribution to
+#'  overall connectivity
 #' @param landscape Landscape object produced by upload.landscape
 #' @param metric Landscape metric to use in the prioritization
 #' @usage patch.imp (landscape, metric)
