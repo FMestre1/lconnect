@@ -12,7 +12,7 @@
 #' landscape <- upload.landscape(rast_path, vec = FALSE)
 #' @author Bruno Silva
 #' @export
-upload.landscape <- function(path, habitat){
+upload.landscape <- function(path, habitat){ # , boundary = F
   
   dsn <- strsplit(path, "/|[\\]")[[1]]
   dsn <- paste(dsn[-c(length(dsn))], collapse = "/")
@@ -21,19 +21,23 @@ upload.landscape <- function(path, habitat){
   layer <- layer[length(layer)]
   layer <- strsplit(as.character(layer), "\\.")[[1]][1]
   
-  landscape <- rgdal::readOGR(dsn = dsn, layer = layer)
+  landscape <- rgdal::readOGR(dsn = dsn, layer = layer, verbose = FALSE)
   
   landscape <- landscape[landscape[[2]] == habitat ,]
-  landscape <- unionSpatialPolygons(landscape, IDs=land[[2]])
+  landscape <- unionSpatialPolygons(landscape, IDs=landscape[[2]])
   
   landscape <- sf::st_as_sf(landscape)
+  boundary <- sf::st_convex_hull(landscape)
+  area_l <- sf::st_area(boundary)
+  
   landscape <- sf::st_cast(landscape, "POLYGON")
   
-  area <- sf::st_area(landscape)
+  area_c <- sf::st_area(landscape)
   
   distance <- sf::st_distance(landscape)
   
-  object <- list(landscape = landscape, distance = distance, area = area)
+  object <- list(landscape = landscape, distance = distance, boundary = boundary,
+                  area_c = area_c, area_l = area_l)
   
   class(object) <- "lconnect"
   
