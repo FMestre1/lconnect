@@ -22,7 +22,8 @@ upload.landscape <- function(land_path, bound_path = NULL, habitat){ # , boundar
   layer <- layer[length(layer)]
   layer <- strsplit(as.character(layer), "\\.")[[1]][1]
   landscape <- rgdal::readOGR(dsn = dsn, layer = layer, verbose = FALSE)
-  landscape <- landscape[landscape[[2]] == habitat ,]
+  landscape <- landscape[landscape[[2]] == habitat,]
+  # use st_union instead to keep everything inside sf package
   landscape <- unionSpatialPolygons(landscape, IDs=landscape[[2]])
   landscape <- sf::st_as_sf(landscape)
   if(is.null(bound_path)){
