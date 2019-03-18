@@ -41,16 +41,18 @@ dCONN[i] <- 100*((full.CONN-partial.CONN)/full.CONN)#send the result to the vect
 
 }
 
-if (vector.out=TRUE){
+if (vector.out==TRUE){
   
 #shape out
+landscape$landscape$attributes<-dCONN
   
 st_write(landscape$landscape, "patches.shp",quiet = TRUE, driver = "ESRI Shapefile", delete_layer = TRUE)
-
 
 message("The vector file with the information on patch prioritization was saved to the working directory!")  
 
 }
 
-return(round(dCONN,3))#get result
+return(dCONN)
+
 }
+
