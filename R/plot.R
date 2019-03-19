@@ -7,7 +7,11 @@
 #' @return Nothing. Side-effect: plots graphs.
 #' @method
 #' @S3method 
-plot.lconnect <- function(x, ...) {
+plot.lconnect <- function(x, ..., key.pos) {
+  if(missing(key.pos)){
+    key.pos <- NULL
+  }
   land$landscape$clusters <- as.factor(land$landscape$clusters)
-  plot(x$landscape, ...)
+  plot(x$landscape, key.pos = key.pos, border = NA, reset = F, ...)
+  plot(x$boundary, key.pos = key.pos, add = T, border = "grey", ...)
 }

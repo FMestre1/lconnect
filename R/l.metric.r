@@ -21,7 +21,7 @@ l.metric <- function (landscape,dist_min, metric) {
     stop(paste(rl, " should be an object of class class 'lconnect'.", sep=""), call. = FALSE)
   }
   
-  distance <- as.dist(landscape$distance)
+  #distance <- as.dist(landscape$distance) # passou para a funcao upload
   
   #create result vector
   result <- c()
