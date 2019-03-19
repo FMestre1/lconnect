@@ -16,6 +16,11 @@ patch.imp <- function(landscape, dist_min, metric, vector.out=F)
 {
 #object from upload.landscape
 #metric - metric to use in the prioritization
+  
+  if (class(landscape)!="lconnect") 
+  {
+    stop(paste(landscape, " should be an object of class class 'lconnect'.", sep=""), call. = FALSE)
+  }
 
 #compute full landscpe metrics
 full.CONN <- as.numeric(l.metric(landscape, dist_min, metric))

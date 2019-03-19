@@ -18,7 +18,7 @@ l.metric <- function (landscape,dist_min, metric) {
   
   if (class(landscape)!="lconnect") 
   {
-    stop(paste(rl, " should be an object of class class 'lconnect'.", sep=""), call. = FALSE)
+    stop(paste(landscape, " should be an object of class class 'lconnect'.", sep=""), call. = FALSE)
   }
   
   #distance <- as.dist(landscape$distance) # passou para a funcao upload
