@@ -34,7 +34,8 @@ upload_land <- function(land_path, bound_path = NULL, habitat, min_dist = NULL){
   landscape <- suppressWarnings(st_sf(clusters = aux$clusters, 
                                       geometry = landscape))
   object <- list(landscape = landscape, min_dist = min_dist, 
-                 distance = distance, boundary = boundary, area_l = area_l)
+                 clusters = aux$clusters, distance = distance, 
+                 boundary = boundary, area_l = area_l)
   class(object) <- "lconnect"
   return(object)
 }
