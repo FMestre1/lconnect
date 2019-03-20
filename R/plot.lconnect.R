@@ -8,19 +8,9 @@
 #' @return Nothing. Side-effect: plots graphs.
 #' @method plot lconnect
 #' @S3method plot lconnect
-#' @method plot pimp
-#' @S3method plot pimp
 plot.lconnect <- function(x, ...){
   land$landscape$clusters <- as.factor(land$landscape$clusters)
   graphics::plot(x$landscape,  border = NA, reset = F, ...)
   graphics::plot(x$boundary,  add = T, border = "grey", ...)
 }
 
-plot.pimp <- function(x, ..., main){
-  if(missing(main)){
-    main <- "Importance (%)"
-  }
-  cols <- length(x$prioritization)
-  graphics::plot(x$landscape["attributes"], border = NA,
-                main = main, ...)
-}
