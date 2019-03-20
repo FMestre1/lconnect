@@ -22,24 +22,27 @@ con_metric <- function (landscape, metric) {
   clusters <- aux$clusters
   area_c <- as.numeric(aux$area_c)
   area_l <- as.numeric(landscape$area_l)
+  min_dist <- landscape$min_dist
+  distance <- landscape$distance
+  NC <- max(clusters)
+  
   
   #create result vector
   result <- c()
   
   if("NC" %in% metric)
   {
-    result <- c(result, NC = max(clusters))
+    result <- c(result, NC = NC)
   }
   
   if("LNK" %in% metric)
   {
-    result <- c(result, LNK = sum(distance < 500))
+    result <- c(result, LNK = sum(distance < min_dist))
   }
 
     if("SLC" %in% metric)
   {
     df0 <- data.frame(area_c, clusters)
-    NC <- max(clusters)
     Ac <- sum(area_c)
     r0 <- rep(NA, NC)
     for(i in 1:NC)
@@ -53,23 +56,17 @@ con_metric <- function (landscape, metric) {
   
   if("MSC" %in% metric)
   {
-    grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=landscape$min_dist)
-    df0 <- data.frame(area_c, clusters)
-    NC <- max(clusters)
-    Ac <- as.numeric(sum(area_c))
+
+    Ac <- sum(area_c)
     result <- c(result, MSC = Ac/NC)
   }
   
   #CCP
   if("CCP" %in% metric)
   {
-    #number of components
-    grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=landscape$min_dist)
+
     df0 <- data.frame(area_c, clusters)
-    NC <- max(clusters)
-    Ac <- as.numeric(sum(area_c))
+    Ac <- sum(area_c)
     r0 <- rep(NA, NC)
     for(i in 1:NC)
     {
@@ -83,10 +80,7 @@ con_metric <- function (landscape, metric) {
   #LCP
   if("LCP" %in% metric)
   {
-    grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=landscape$min_dist)
     df0 <- data.frame(area_c, clusters)
-    NC <- max(clusters)
     r0 <- rep(NA, NC)
     for(i in 1:NC)
     {
@@ -100,17 +94,22 @@ con_metric <- function (landscape, metric) {
   #CPL
   if("CPL" %in% metric)
   {
-
-  }
+    d1 <- upper.tri(as.matrix(distance))*as.matrix(distance)
+    d1[d1==0]<-NA
+    e1 <- as.data.frame(which(d1<dist_min, arr.ind = TRUE, useNames = FALSE))
+    g1 <- graph_from_data_frame(e1, directed = FALSE)
+    short_p <- shortest.paths(g1)
+    n_links <- (sum(!is.infinite(short_p))-nrow(short_p))/2
+    filt<-which(!is.infinite(short_p))
+    sum_links <- sum(short_p[filt])/2
+    result <- c(result, CPL = sum_links/n_links)
+    }
   
   #ECS
   if("ECS" %in% metric)
   {
-    grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=landscape$min_dist)
     df0 <- data.frame(area_c, clusters)
-    NC <- max(clusters)
-    Ac <- as.numeric(sum(area_c))
+    Ac <- sum(area_c)
     r0 <- rep(NA, NC)
     for(i in 1:NC)
     {
@@ -125,22 +124,41 @@ con_metric <- function (landscape, metric) {
   #AWF
   if("AWF" %in% metric)
   {
-  }
+    k <- -(log(0.5)/(dist_min/2))
+    out <- matrix(NA, nrow = length(area_c), ncol = length(area_c))
+    for(i in 1:length(area_c)){
+      for(j in 1:length(area_c)){
+        prob <- exp(-k*(as.matrix(distance)[i, j])) * area_c[i] * area_c[j]
+        out[i, j] <- prob
+    }# final for j
+  } # final for i
+    diag(out)<-0
+    result <- c(result, AWF = sum(out))
+   }
 
   #IIC
   if("IIC" %in% metric)
   {
+    
+    d1 <- upper.tri(as.matrix(distance))*as.matrix(distance)
+    d1[d1==0]<-NA
+    e1 <- as.data.frame(which(d1<dist_min, arr.ind = TRUE, useNames = FALSE))
+    e2 <- cbind(e1[,2],e1[,1])
+    g1 <- graph_from_data_frame(e1, directed = FALSE)
+    short_p <- shortest.paths(g1)
+    
+    out <- matrix(NA, nrow = length(area_c), ncol = length(area_c))
+    for(i in as.numeric(row.names(short_p))){
+      for(j in as.numeric(row.names(short_p))){
+        nij <- short_p[as.character(i),as.character(j)]
+        prob <-  (area_c[i] * area_c[j])/(1+nij)
+        out[i, j] <- prob
+      }# final for j
+    } # final for i   
+    out[is.na(out)]<-0
+    result <- c(result, IIC = (sum(out)/(area_l^2)))
   }
 
-  #PC
-  if("PC" %in% metric)
-  {
-  }
-
-  #ECA
-  if("ECA" %in% metric)
-  {
-  }
 
   #provide results
   return(round(result,5))
