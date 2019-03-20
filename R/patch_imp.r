@@ -5,6 +5,7 @@
 #' metrics are calculated without that specific patch.
 #' @param landscape lconnect object produced by upload_land()
 #' @param metric string indicating the landscape metric to use in the 
+#' @param vector_out TRUE/FALSE
 #' prioritization. The current version only allows the use of IIC.
 #' @usage patch_imp(landscape, metric)
 #' @return Returns a vector depicting each patch's importance to overall 
@@ -44,9 +45,10 @@ partial_conn <- as.numeric(con_metric(landscape=land1, metric))
 dCONN[i] <- 100*((full_conn - partial_conn) / full_conn)
 }
 
+landscape$landscape$attributes<-dCONN
 if (vector_out){
   
-landscape$landscape$attributes<-dCONN
+
   
 sf::st_write(landscape$landscape, "patches.shp",quiet = TRUE, driver = "ESRI Shapefile", delete_layer = TRUE)
 

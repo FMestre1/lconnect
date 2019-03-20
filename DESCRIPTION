@@ -15,5 +15,5 @@ LazyData: true
 Imports: 
     sf,
     igraph,
-    grDevices
+    RColorBrewer
 RoxygenNote: 6.1.1
