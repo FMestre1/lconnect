@@ -9,11 +9,14 @@ patch_imp(landscape, metric)
 \arguments{
 \item{landscape}{lconnect object produced by upload_land()}
 
-\item{metric}{string indicating the landscape metric to use in the 
-prioritization. Must be one of "XX", "XX" .....}
+\item{metric}{string indicating the landscape metric to use in the}
+
+\item{vector_out}{TRUE/FALSE
+prioritization. The current version only allows the use of IIC.}
 }
 \value{
-que valores a funcao retorna
+Returns a vector depicting each patch's importance to overall 
+connectivity.
 }
 \description{
 Prioritization of patches according to individual contribution 
@@ -24,7 +27,7 @@ metrics are calculated without that specific patch.
 patch_imp
 }
 \references{
-artigos em que se baseia a funcao
+#' Saura, S., Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: Comparison with existing indices and application to a case study. Landscape and Unrban Planning, 83(2-3):91-103.
 }
 \author{
 Frederico Mestre
