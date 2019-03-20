@@ -12,7 +12,7 @@
 #' @references artigos em que se baseia a funcao
 #' @author Frederico Mestre
 #' @export
-l.metric <- function (landscape,dist_min, metric) {
+l.metric <- function (landscape, metric) {
   # landscape object produced by upload.landscape
   # metric - landscape metrics to be computed
   
@@ -29,7 +29,7 @@ l.metric <- function (landscape,dist_min, metric) {
   if("NC" %in% metric)
   {
     grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=dist_min)
+    clusters <- cutree(grouping, h=landscape$min_dist)
     df0 <- data.frame(landscape$area_c, clusters)
     result <- c(result,NC = max(clusters))
   }
@@ -42,7 +42,7 @@ l.metric <- function (landscape,dist_min, metric) {
   if("SLC" %in% metric)
   {
     grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=dist_min)
+    clusters <- cutree(grouping, h=landscape$min_dist)
     df0 <- data.frame(landscape$area_c, clusters)
     NC <- max(clusters)
     Ac <- as.numeric(sum(landscape$area_c))
@@ -59,7 +59,7 @@ l.metric <- function (landscape,dist_min, metric) {
   if("MSC" %in% metric)
   {
     grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=dist_min)
+    clusters <- cutree(grouping, h=landscape$min_dist)
     df0 <- data.frame(landscape$area_c, clusters)
     NC <- max(clusters)
     Ac <- as.numeric(sum(landscape$area_c))
@@ -71,7 +71,7 @@ l.metric <- function (landscape,dist_min, metric) {
   {
     #number of components
     grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=dist_min)
+    clusters <- cutree(grouping, h=landscape$min_dist)
     df0 <- data.frame(landscape$area_c, clusters)
     NC <- max(clusters)
     Ac <- as.numeric(sum(landscape$area_c))
@@ -89,7 +89,7 @@ l.metric <- function (landscape,dist_min, metric) {
   if("LCP" %in% metric)
   {
     grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=dist_min)
+    clusters <- cutree(grouping, h=landscape$min_dist)
     df0 <- data.frame(landscape$area_c, clusters)
     NC <- max(clusters)
     r0 <- rep(NA, NC)
@@ -112,7 +112,7 @@ l.metric <- function (landscape,dist_min, metric) {
   if("ECS" %in% metric)
   {
     grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=dist_min)
+    clusters <- cutree(grouping, h=landscape$min_dist)
     df0 <- data.frame(landscape$area_c, clusters)
     NC <- max(clusters)
     Ac <- as.numeric(sum(landscape$area_c))
