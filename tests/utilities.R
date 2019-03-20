@@ -5,8 +5,4 @@ land <- upload_land(land_path, habitat = 1, min_dist =500)
 
 plot(land$landscape)
 
-nc <- st_read(vec_path)
-plot(nc)
-
-u <- st_union(nc)
-plot(u)
+aux <- component_calc(land$landscape, 500)

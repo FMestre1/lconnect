@@ -15,34 +15,33 @@
 con_metric <- function (landscape, metric) {
   if (class(landscape)!="lconnect") 
   {
-    stop(paste(landscape, " should be an object of class class 'lconnect'.", sep=""), call. = FALSE)
+    stop("landscape must be an object of class class 'lconnect'.",
+    call. = FALSE)
   }
-  
-
+  aux <- component_calc(landscape$landscape)
+  clusters <- aux$clusters
+  area_c <- as.numeric(aux$area_c)
+  area_l <- as.numeric(landscape$area_l)
+  min_dist <- landscape$min_dist
   
   #create result vector
   result <- c()
   
   if("NC" %in% metric)
   {
-    grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=landscape$min_dist)
-    df0 <- data.frame(area_c, clusters)
-    result <- c(result,NC = max(clusters))
+    result <- c(result, NC = max(clusters))
   }
   
   if("LNK" %in% metric)
   {
-    result <- c(result, LNK = sum(distance<500))
+    result <- c(result, LNK = sum(distance < 500))
   }
-  
-  if("SLC" %in% metric)
+
+    if("SLC" %in% metric)
   {
-    grouping <- hclust(distance, "single")
-    clusters <- cutree(grouping, h=landscape$min_dist)
     df0 <- data.frame(area_c, clusters)
     NC <- max(clusters)
-    Ac <- as.numeric(sum(area_c))
+    Ac <- sum(area_c)
     r0 <- rep(NA, NC)
     for(i in 1:NC)
     {

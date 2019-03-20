@@ -23,7 +23,7 @@ patch_imp <- function(landscape, metric, vector_out = F)
   }
 
 #compute full landscpe metrics
-full_conn <- as.numeric(l.metric(landscape, metric)) #este as.numeric tem de vir já da l.metric
+full_conn <- as.numeric(con_metric(landscape, metric)) #este as.numeric tem de vir já da con_metric
 
 npatch <- length(landscape$landscape$geometry)
 
@@ -38,7 +38,7 @@ land2 <- remove_patch(land1, i) #removing patch i
   #tem de se tirar uma mancha
   #re-calcular a área dos componentes
 
-partial_conn <- as.numeric(l.metric(landscape=land2, metric))
+partial_conn <- as.numeric(con_metric(landscape=land2, metric))
 
 dCONN[i] <- 100*((full_conn - partial_conn) / full_conn)#send the result to the vector
 
