@@ -28,7 +28,6 @@ upload_land <- function(land_path, bound_path = NULL, habitat, min_dist = NULL){
   }
   area_l <- sf::st_area(boundary)
   landscape <- sf::st_cast(landscape, "POLYGON")
-  area_c <- sf::st_area(landscape)
   distance <- sf::st_distance(landscape)
   distance <- as.dist(distance)
   if(is.null(min_dist)){
@@ -40,8 +39,7 @@ upload_land <- function(land_path, bound_path = NULL, habitat, min_dist = NULL){
   landscape <- suppressWarnings(st_sf(clusters = clusters, 
                                       geometry = landscape))
   object <- list(landscape = landscape, min_dist = min_dist, 
-                 distance = distance, boundary = boundary, area_c = area_c, 
-                 area_l = area_l)
+                 distance = distance, boundary = boundary, area_l = area_l)
   class(object) <- "lconnect"
   return(object)
 }

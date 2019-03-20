@@ -1,4 +1,4 @@
-#' l.metric
+#' con_metric
 #' @title 
 #' @description
 #' Compute connectivity metrics
@@ -6,22 +6,19 @@
 #' @description Calculates several landscape connectivity metrics
 #' @param landscape Landscape object produced by upload.landscape
 #' @param metric Landscape metrics to be computed
-#' @usage l.metric (landscape, metric)
+#' @usage con_metric (landscape, metric)
 #' @return que valores a funcao retorna
 #' @examples exemplos de aplicacao com dados fornecidos pelo package
 #' @references artigos em que se baseia a funcao
 #' @author Frederico Mestre
 #' @export
-l.metric <- function (landscape, metric) {
-  # landscape object produced by upload.landscape
-  # metric - landscape metrics to be computed
-  
+con_metric <- function (landscape, metric) {
   if (class(landscape)!="lconnect") 
   {
     stop(paste(landscape, " should be an object of class class 'lconnect'.", sep=""), call. = FALSE)
   }
   
-  #distance <- as.dist(landscape$distance) # passou para a funcao upload
+  area_c <- sf::st_area(landscape$landscape)
   
   #create result vector
   result <- c()
@@ -30,7 +27,7 @@ l.metric <- function (landscape, metric) {
   {
     grouping <- hclust(distance, "single")
     clusters <- cutree(grouping, h=landscape$min_dist)
-    df0 <- data.frame(landscape$area_c, clusters)
+    df0 <- data.frame(area_c, clusters)
     result <- c(result,NC = max(clusters))
   }
   
@@ -43,9 +40,9 @@ l.metric <- function (landscape, metric) {
   {
     grouping <- hclust(distance, "single")
     clusters <- cutree(grouping, h=landscape$min_dist)
-    df0 <- data.frame(landscape$area_c, clusters)
+    df0 <- data.frame(area_c, clusters)
     NC <- max(clusters)
-    Ac <- as.numeric(sum(landscape$area_c))
+    Ac <- as.numeric(sum(area_c))
     r0 <- rep(NA, NC)
     for(i in 1:NC)
     {
@@ -60,9 +57,9 @@ l.metric <- function (landscape, metric) {
   {
     grouping <- hclust(distance, "single")
     clusters <- cutree(grouping, h=landscape$min_dist)
-    df0 <- data.frame(landscape$area_c, clusters)
+    df0 <- data.frame(area_c, clusters)
     NC <- max(clusters)
-    Ac <- as.numeric(sum(landscape$area_c))
+    Ac <- as.numeric(sum(area_c))
     result <- c(result, MSC = Ac/NC)
   }
   
@@ -72,9 +69,9 @@ l.metric <- function (landscape, metric) {
     #number of components
     grouping <- hclust(distance, "single")
     clusters <- cutree(grouping, h=landscape$min_dist)
-    df0 <- data.frame(landscape$area_c, clusters)
+    df0 <- data.frame(area_c, clusters)
     NC <- max(clusters)
-    Ac <- as.numeric(sum(landscape$area_c))
+    Ac <- as.numeric(sum(area_c))
     r0 <- rep(NA, NC)
     for(i in 1:NC)
     {
@@ -90,7 +87,7 @@ l.metric <- function (landscape, metric) {
   {
     grouping <- hclust(distance, "single")
     clusters <- cutree(grouping, h=landscape$min_dist)
-    df0 <- data.frame(landscape$area_c, clusters)
+    df0 <- data.frame(area_c, clusters)
     NC <- max(clusters)
     r0 <- rep(NA, NC)
     for(i in 1:NC)
@@ -113,9 +110,9 @@ l.metric <- function (landscape, metric) {
   {
     grouping <- hclust(distance, "single")
     clusters <- cutree(grouping, h=landscape$min_dist)
-    df0 <- data.frame(landscape$area_c, clusters)
+    df0 <- data.frame(area_c, clusters)
     NC <- max(clusters)
-    Ac <- as.numeric(sum(landscape$area_c))
+    Ac <- as.numeric(sum(area_c))
     r0 <- rep(NA, NC)
     for(i in 1:NC)
     {

@@ -1,10 +1,11 @@
 #' patch_imp
 #' @title
-#' @description
-#' Patch prioritization according to individual patch contribution to
-#' overall connectivity
+#' @description Prioritization of patches according to individual contribution 
+#' to overall connectivity. Each patch is removed at a time and connectivity 
+#' metrics are calculated without that specific patch.
 #' @param landscape lconnect object produced by upload_land()
-#' @param metric landscape metric to use in the prioritization
+#' @param metric string indicating the landscape metric to use in the 
+#' prioritization. Must be one of "XX", "XX" .....
 #' @usage patch_imp (landscape, metric)
 #' @return que valores a funcao retorna
 #' @examples exemplos de aplicacao com dados fornecidos pelo package
@@ -13,7 +14,7 @@
 #' @author Bruno Silva
 #' @export
 
-patch_imp <- function(landscape, metric, vector.out = F)
+patch_imp <- function(landscape, metric, vector_out = F)
 {
   if (!is.lconnect(landscape)) 
   {
@@ -22,7 +23,7 @@ patch_imp <- function(landscape, metric, vector.out = F)
   }
 
 #compute full landscpe metrics
-full.CONN <- as.numeric(l.metric(landscape, landscape$min_dist, metric))
+full_conn <- as.numeric(l.metric(landscape, metric)) #este as.numeric tem de vir já da l.metric
 
 npatch <- length(landscape$landscape$geometry)
 
@@ -35,17 +36,15 @@ land1 <- landscape #landscape #This is just no to change landscape
 land2 <- remove_patch(land1, i) #removing patch i
   
   #tem de se tirar uma mancha
-  #refazer o convex hull
-  #re-calcular a área total
   #re-calcular a área dos componentes
 
-partial.CONN <- as.numeric(l.metric(landscape=land2, landscape$min_dist, metric))
+partial_conn <- as.numeric(l.metric(landscape=land2, metric))
 
-dCONN[i] <- 100*((full.CONN-partial.CONN)/full.CONN)#send the result to the vector
+dCONN[i] <- 100*((full_conn - partial_conn) / full_conn)#send the result to the vector
 
 }
 
-if (vector.out==TRUE){
+if (vector_out){
   
 #shape out
 landscape$landscape$attributes<-dCONN
