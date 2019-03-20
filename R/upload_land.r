@@ -9,14 +9,16 @@
 #' If NULL (default option) a convex hull will be created and used as boundary.
 #' @param habitat vector with habitat categories. The categories can be numeric
 #' or character.
+#' @param min_dist numeric indicating the minimum distance to aggregate patches. 
 #' @usage upload_land(land_path, bound_path = NULL, habitat, min_dist = NULL)
 #' @return A lconnect object is returned.
-#' @examples vec_path <- system.file("extdata/vector.shp", package = "lconnect")
+#' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
 #' habitat = 1, min_dist = 500)
 #' @author Bruno Silva
 #' @author Frederico Mestre
 #' @export
+#' @exportClass lconnect
 upload_land <- function(land_path, bound_path = NULL, habitat, min_dist = NULL){
   landscape <- sf::st_read(land_path, quiet = T)
   landscape <- landscape[landscape[[1]] == habitat,]
@@ -29,9 +31,9 @@ upload_land <- function(land_path, bound_path = NULL, habitat, min_dist = NULL){
   area_l <- sf::st_area(boundary)
   landscape <- sf::st_cast(landscape, "POLYGON")
   distance <- sf::st_distance(landscape)
-  distance <- as.dist(distance)
+  distance <- stats::as.dist(distance)
   aux <- component_calc(landscape, distance, min_dist)
-  landscape <- suppressWarnings(st_sf(clusters = aux$clusters, 
+  landscape <- suppressWarnings(sf::st_sf(clusters = aux$clusters, 
                                       geometry = landscape))
   object <- list(landscape = landscape, min_dist = min_dist, 
                  clusters = aux$clusters, distance = distance, 

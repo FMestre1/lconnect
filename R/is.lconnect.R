@@ -1,5 +1,5 @@
 #' is.lconnect
-#' @title 
+#' @title Test for class lconnect
 #' @description Tests if an object belongs to lconnect class 
 #' @param x object to test
 #' @usage is.lconnect(x)

@@ -7,7 +7,7 @@
 #' "CPL", "ECS", "AWF" and "IC".  
 #' @usage con_metric(landscape, metric)
 #' @return vector with the selected metrics.
-#' @examples vec_path <- system.file("extdata/vector.shp", package = "lconnect")
+#' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
 #' habitat = 1, min_dist = 500)
 #' metrics <- con_metric(landscape, metric = c("NC", "LCP"))
@@ -24,7 +24,7 @@
 #' @author Frederico Mestre
 #' @author Bruno Silva
 #' @export
-con_metric <- function (landscape, metric) {
+con_metric <- function(landscape, metric) {
   if (class(landscape) != "lconnect") 
   {
     stop("landscape must be an object of class class 'lconnect'.",
@@ -134,8 +134,8 @@ con_metric <- function (landscape, metric) {
     d1[d1 == 0] <- NA
     e1 <- as.data.frame(which(d1 < min_dist, arr.ind = TRUE, useNames = FALSE))
     e2 <- cbind(e1[, 2], e1[, 1])
-    g1 <- graph_from_data_frame(e1, directed = FALSE)
-    short_p <- shortest.paths(g1)
+    g1 <- igraph::graph_from_data_frame(e1, directed = FALSE)
+    short_p <- igraph::shortest.paths(g1)
     out <- matrix(NA, nrow = length(area_c), ncol = length(area_c))
     for(i in as.numeric(row.names(short_p))){
       for(j in as.numeric(row.names(short_p))){

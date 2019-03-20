@@ -4,7 +4,7 @@
 \alias{upload_land}
 \title{Import and convert a shapefile to a lconnect object}
 \usage{
-upload_land(land_path, bound_path = NULL, habitat)
+upload_land(land_path, bound_path = NULL, habitat, min_dist = NULL)
 }
 \arguments{
 \item{land_path}{string, indicating the full path of the landscape shapefile.}
@@ -14,6 +14,8 @@ If NULL (default option) a convex hull will be created and used as boundary.}
 
 \item{habitat}{vector with habitat categories. The categories can be numeric
 or character.}
+
+\item{min_dist}{numeric indicating the minimum distance to aggregate patches.}
 }
 \value{
 A lconnect object is returned.
@@ -28,8 +30,9 @@ coordinates and the first field must be contain the habitat categories.
 upload_land
 }
 \examples{
-vec_path <- system.file("extdata/vector.shp", package = "lconnect")
-landscape <- upload_land(vec_path, bound_path = NULL, habitat = 1)
+vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
+landscape <- upload_land(vec_path, bound_path = NULL,
+habitat = 1, min_dist = 500)
 }
 \author{
 Bruno Silva

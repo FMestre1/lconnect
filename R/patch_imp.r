@@ -1,14 +1,13 @@
 #' patch_imp
-#' @title
+#' @title Prioritization of patches according to individual contribution
 #' @description Prioritization of patches according to individual contribution 
 #' to overall connectivity. Each patch is removed at a time and connectivity 
 #' metrics are calculated without that specific patch.
 #' @param landscape lconnect object produced by upload_land()
 #' @param metric string indicating the landscape metric to use in the 
 #' prioritization. Must be one of "XX", "XX" .....
-#' @usage patch_imp (landscape, metric)
+#' @usage patch_imp(landscape, metric)
 #' @return que valores a funcao retorna
-#' @examples exemplos de aplicacao com dados fornecidos pelo package
 #' @references artigos em que se baseia a funcao
 #' @author Frederico Mestre
 #' @author Bruno Silva
@@ -49,7 +48,7 @@ if (vector_out){
 #shape out
 landscape$landscape$attributes<-dCONN
   
-st_write(landscape$landscape, "patches.shp",quiet = TRUE, driver = "ESRI Shapefile", delete_layer = TRUE)
+sf::st_write(landscape$landscape, "patches.shp",quiet = TRUE, driver = "ESRI Shapefile", delete_layer = TRUE)
 
 message("The vector file with the information on patch prioritization was saved to the working directory!")  
 
