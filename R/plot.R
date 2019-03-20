@@ -7,7 +7,7 @@
 #' @return Nothing. Side-effect: plots graphs.
 #' @method plot.lconnect
 #' @S3method plot.lconnect
-plot.lconnect <- function(x, ..., key.pos) {
+plot.lconnect <- function(x, ..., key.pos){
   if(missing(key.pos)){
     key.pos <- NULL
   }

@@ -13,13 +13,13 @@
 #' @return A lconnect object is returned.
 #' @examples vec_path <- system.file("extdata/vector.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
-#' habitat = 1, min_dist = NULL)
+#' habitat = 1, min_dist = 500)
 #' @author Bruno Silva
 #' @author Frederico Mestre
 #' @export
 upload_land <- function(land_path, bound_path = NULL, habitat, min_dist = NULL){
   landscape <- sf::st_read(land_path, quiet = T)
-  landscape <- landscape[landscape[[2]] == habitat,]
+  landscape <- landscape[landscape[[1]] == habitat,]
   landscape <- sf::st_union(landscape)
   if(is.null(bound_path)){
     boundary <- sf::st_convex_hull(landscape)
