@@ -1,7 +1,7 @@
 #' @param object object of class sf or sfc
 #' @param min_dist numeric indicating species dispersion
 #' @keywords internal
-component_calc <- function(object, min_dist = NULL){
+component_calc <- function(object, distance, min_dist = NULL){
 if(is.null(min_dist)){
   clusters <- rep(1, length(object)) 
 } else{

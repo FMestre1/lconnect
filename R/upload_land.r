@@ -30,7 +30,7 @@ upload_land <- function(land_path, bound_path = NULL, habitat, min_dist = NULL){
   landscape <- sf::st_cast(landscape, "POLYGON")
   distance <- sf::st_distance(landscape)
   distance <- as.dist(distance)
-  aux <- component_calc(landscape, min_dist)
+  aux <- component_calc(landscape, distance, min_dist)
   landscape <- suppressWarnings(st_sf(clusters = aux$clusters, 
                                       geometry = landscape))
   object <- list(landscape = landscape, min_dist = min_dist, 

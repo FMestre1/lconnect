@@ -18,11 +18,10 @@ con_metric <- function (landscape, metric) {
     stop("landscape must be an object of class class 'lconnect'.",
     call. = FALSE)
   }
-  aux <- component_calc(landscape$landscape)
+  aux <- component_calc(landscape$landscape, landscape$distance, landscape$min_dist)
   clusters <- aux$clusters
   area_c <- as.numeric(aux$area_c)
   area_l <- as.numeric(landscape$area_l)
-  min_dist <- landscape$min_dist
   
   #create result vector
   result <- c()
