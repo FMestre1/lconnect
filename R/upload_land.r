@@ -13,7 +13,7 @@
 #' @return A lconnect object is returned.
 #' @examples vec_path <- system.file("extdata/vector.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
-#'  habitat = 1, min_dist = NULL)
+#' habitat = 1, min_dist = NULL)
 #' @author Bruno Silva
 #' @author Frederico Mestre
 #' @export
@@ -30,13 +30,8 @@ upload_land <- function(land_path, bound_path = NULL, habitat, min_dist = NULL){
   landscape <- sf::st_cast(landscape, "POLYGON")
   distance <- sf::st_distance(landscape)
   distance <- as.dist(distance)
-  if(is.null(min_dist)){
-    clusters <- rep(1, length(landscape)) 
-  } else{
-    groups <- hclust(distance, "single")
-    clusters <- cutree(groups, h = min_dist)
-  }
-  landscape <- suppressWarnings(st_sf(clusters = clusters, 
+  aux <- component_calc(landscape, min_dist)
+  landscape <- suppressWarnings(st_sf(clusters = aux$clusters, 
                                       geometry = landscape))
   object <- list(landscape = landscape, min_dist = min_dist, 
                  distance = distance, boundary = boundary, area_l = area_l)

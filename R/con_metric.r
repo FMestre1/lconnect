@@ -18,7 +18,7 @@ con_metric <- function (landscape, metric) {
     stop(paste(landscape, " should be an object of class class 'lconnect'.", sep=""), call. = FALSE)
   }
   
-  area_c <- sf::st_area(landscape$landscape)
+
   
   #create result vector
   result <- c()
