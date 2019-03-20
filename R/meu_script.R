@@ -1,10 +1,7 @@
-#load packages
-library(maptools)
-library(sp)
-library(raster)
+#Load packages
 library(sf)
-library(units)
 library(igraph)
+library(stat)
 
 #load functions
 source("D:/lconnect/R/patch_imp.r")
@@ -21,9 +18,6 @@ vec_path <- ("D:/lconnect/inst/extdata/vec_projected.shp")
 
 #upload landscape
 land <- upload_land(vec_path, habitat = 1, min_dist = 250)
-names(land)
-
-landscape <- land
 
 plot(land)
 
@@ -33,7 +27,7 @@ c1<-st_coordinates(centr)
 text(x=c1[,1], y=c1[,2], land$clusters, pos=2)
 
 #label patches
-text(x=c1[,1], y=c1[,2], rownames(land$landscape),col="red")
+text(x=c1[,1], y=c1[,2], rownames(land$landscape))
 
 
 class(land)
@@ -41,6 +35,6 @@ class(land)
 #Connectivity metrics
 con_metric(land, metric="CCP")
 
-patch.imp(land, metric="LCP", vector.out=FALSE)
+patch_imp(land, metric="IIC", vector_out=FALSE)
 
 

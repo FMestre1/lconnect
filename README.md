@@ -68,21 +68,6 @@ by PascualHortal and Saura (2006). It is based on habitat availability and on a
 binary connection model (as opposed to a probabilistic). It ranges from 0 to 1 
 (higher values indicating more connectivity). Threshold dependent (dispersal distance).
 
-##### Probability of connectivity #####
-’PC’ - Probability of connectivity. Probability that two points randomly placed 
-in the landscape are in habitat patches that are connected, given the number of 
-habitat patches and the connection probabilities (pij). Similar to IIC, although 
-assuming probabilistic connections between patches (Saura and Pascual-Hortal 2007). 
-Probability of inter-patch dispersal is computed in the same way as for AWF. 
-Does not depend on any distance threshold (probabilistic).
-
-##### Equivalent connected area #####
-’ECA’ - The Equivalent Connected Area is the square root of the numerator in PC, 
-not accounting for the total landscape area (AL) (Saura 2011a, 2011b). It is 
-defined as ’...the size of a single habitat patch (maximally connected) that would 
-provide the same value of the probability of connectivity than the actual habitat 
-pattern in the landscape’ (Saura 2011a).
-
 ##### References #####
 Bunn, A. G., Urban, D. L., and Keitt, T. H. (2000). Landscape connectivity: a 
 conservation application of graph theory. Journal of Environmental Management, 
