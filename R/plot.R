@@ -8,6 +8,8 @@
 #' @return Nothing. Side-effect: plots graphs.
 #' @method plot lconnect
 #' @S3method plot lconnect
+#' @method plot pimp
+#' @S3method plot pimp
 plot.lconnect <- function(x, ..., key.pos){
   if(missing(key.pos)){
     key.pos <- NULL
@@ -15,4 +17,13 @@ plot.lconnect <- function(x, ..., key.pos){
   land$landscape$clusters <- as.factor(land$landscape$clusters)
   graphics::plot(x$landscape, key.pos = key.pos, border = NA, reset = F, ...)
   graphics::plot(x$boundary, key.pos = key.pos, add = T, border = "grey", ...)
+}
+
+plot.pimp <- function(x, ..., key.pos){
+  if(missing(key.pos)){
+    key.pos <- NULL
+  }
+  cols <- length(x)
+  graphics::plot(x$landscape, key.pos = key.pos, border = NA, reset = F,
+                 pal = grDevices::heat.colors(cols), ...)
 }
