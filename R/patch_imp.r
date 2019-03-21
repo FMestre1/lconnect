@@ -2,12 +2,12 @@
 #' @title Prioritization of patches according to individual contribution
 #' @description Prioritization of patches according to individual contribution 
 #' to overall connectivity. Each patch is removed at a time and connectivity 
-#' metrics are calculated without that specific patch.
+#' metrics are calculated without that specific patch. The current version only 
+#' allows the use of IIC.
 #' @param landscape lconnect object produced by upload_land()
 #' @param metric string indicating the landscape metric to use in the 
 #' @param vector_out TRUE/FALSE
-#' prioritization. The current version only allows the use of IIC.
-#' @usage patch_imp(landscape, metric)
+#' @usage patch_imp(landscape, metric, vector_out = F)
 #' @return Returns a vector depicting each patch's importance to overall 
 #' connectivity.
 #' @references #' Saura, S., Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: Comparison with existing indices and application to a case study. Landscape and Unrban Planning, 83(2-3):91-103.

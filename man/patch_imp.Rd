@@ -4,15 +4,14 @@
 \alias{patch_imp}
 \title{Prioritization of patches according to individual contribution}
 \usage{
-patch_imp(landscape, metric)
+patch_imp(landscape, metric, vector_out = F)
 }
 \arguments{
 \item{landscape}{lconnect object produced by upload_land()}
 
 \item{metric}{string indicating the landscape metric to use in the}
 
-\item{vector_out}{TRUE/FALSE
-prioritization. The current version only allows the use of IIC.}
+\item{vector_out}{TRUE/FALSE}
 }
 \value{
 Returns a vector depicting each patch's importance to overall 
@@ -21,7 +20,8 @@ connectivity.
 \description{
 Prioritization of patches according to individual contribution 
 to overall connectivity. Each patch is removed at a time and connectivity 
-metrics are calculated without that specific patch.
+metrics are calculated without that specific patch. The current version only 
+allows the use of IIC.
 }
 \details{
 patch_imp
