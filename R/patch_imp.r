@@ -10,7 +10,15 @@
 #' @usage patch_imp(landscape, metric, vector_out = F)
 #' @return Returns a vector depicting each patch's importance to overall 
 #' connectivity.
-#' @references #' Saura, S., Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: Comparison with existing indices and application to a case study. Landscape and Unrban Planning, 83(2-3):91-103.
+#' @references #' Saura, S., Pascual-Hortal, L. (2007). A new habitat 
+#' availability index to integrate connectivity in landscape conservation planning: 
+#' Comparison with existing indices and application to a case study. Landscape and
+#' Urban Planning, 83(2-3):91-103.
+#' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
+#' landscape <- upload_land(vec_path, bound_path = NULL,
+#'                         habitat = 1, min_dist = 500)
+#' importance <- patch_imp(landscape, metric = "IIC")
+#' plot(importance)
 #' @author Frederico Mestre
 #' @author Bruno Silva
 #' @export
@@ -28,41 +36,24 @@ patch_imp <- function(landscape, metric, vector_out = F)
     stop(paste0("The argument 'metric' must use only the IIC metric."),
          call. = FALSE)
   }
-
-#compute full landscpe metrics
-full_conn <- con_metric(landscape, metric)
-
-npatch <- length(landscape$landscape$geometry)
-
-dCONN <- rep(NA, npatch)
-
-for (i in 1:npatch){
-
-land1 <- remove_patch(landscape, i)
-
-partial_conn <- as.numeric(con_metric(landscape=land1, metric))
-
-dCONN[i] <- 100*((full_conn - partial_conn) / full_conn)
-}
-
-landscape$landscape$attributes<-dCONN
-if (vector_out){
-  
-
-  
-sf::st_write(landscape$landscape, "patches.shp",quiet = TRUE, driver = "ESRI Shapefile", delete_layer = TRUE)
-
-message("The vector file with the information on patch prioritization was saved to the working directory!")  
-
-}
-
-result <- list(landscape = landscape$landscape, prioritization = dCONN)
-
-class(result)<- "pimp"
-
-print(dCONN)
-
-return(result)
-
+  full_conn <- con_metric(landscape, metric)
+  npatch <- length(landscape$landscape$geometry)
+  dCONN <- rep(NA, npatch)
+  for (i in 1:npatch){
+    land1 <- remove_patch(landscape, i)
+    partial_conn <- as.numeric(con_metric(landscape=land1, metric))
+    dCONN[i] <- 100*((full_conn - partial_conn) / full_conn)
+  }
+  landscape$landscape$attributes<-dCONN
+  if (vector_out){
+    sf::st_write(landscape$landscape, "patches.shp",quiet = TRUE, 
+                 driver = "ESRI Shapefile", delete_layer = TRUE)
+    message("The vector file with the information on patch prioritization
+            was saved to the working directory!")  
+  }
+  result <- list(landscape = landscape$landscape, prioritization = dCONN)
+  class(result)<- "pimp"
+  print(dCONN)
+  return(result)
 }
 

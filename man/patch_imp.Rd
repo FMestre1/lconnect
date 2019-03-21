@@ -26,8 +26,18 @@ allows the use of IIC.
 \details{
 patch_imp
 }
+\examples{
+vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
+landscape <- upload_land(vec_path, bound_path = NULL,
+                        habitat = 1, min_dist = 500)
+importance <- patch_imp(landscape, metric = "IIC")
+plot(importance)
+}
 \references{
-#' Saura, S., Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: Comparison with existing indices and application to a case study. Landscape and Unrban Planning, 83(2-3):91-103.
+#' Saura, S., Pascual-Hortal, L. (2007). A new habitat 
+availability index to integrate connectivity in landscape conservation planning: 
+Comparison with existing indices and application to a case study. Landscape and
+Urban Planning, 83(2-3):91-103.
 }
 \author{
 Frederico Mestre

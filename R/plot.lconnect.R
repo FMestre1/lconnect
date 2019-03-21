@@ -8,8 +8,8 @@
 #' @method plot lconnect
 #' @S3method plot lconnect
 plot.lconnect <- function(x, ...){
-  land$landscape$clusters <- as.factor(land$landscape$clusters)
-  graphics::plot(x$landscape,  border = NA, reset = F, ...)
+  x$landscape$clusters <- as.factor(x$landscape$clusters)
+  graphics::plot(x$landscape,  key.pos = NULL ,border = NA, reset = F, ...)
   graphics::plot(x$boundary,  add = T, border = "grey", ...)
 }
 

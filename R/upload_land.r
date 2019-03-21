@@ -15,6 +15,7 @@
 #' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
 #' habitat = 1, min_dist = 500)
+#' plot(landscape)
 #' @author Bruno Silva
 #' @author Frederico Mestre
 #' @export
