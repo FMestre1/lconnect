@@ -22,6 +22,7 @@
 #' @author Frederico Mestre
 #' @author Bruno Silva
 #' @export
+#' @exportClass lconnect
 
 patch_imp <- function(landscape, metric, vector_out = F)
 {
