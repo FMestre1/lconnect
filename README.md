@@ -20,11 +20,11 @@ means that the habitat patches are either connected or unconnected (Pascual-Hort
 and Saura, 2006). Higher LNK implies higher connectivity. Threshold dependent 
 (dispersal distance).
 
-##### Number of links #####
+##### Size of the Largest Component #####
 ’SLC’ - Area of the largest component (group of interconnected patches) (Pascual-
 Hortal and Saura, 2006). Threshold dependent (dispersal distance).
 
-##### Number of links #####
+##### Mean Size of Components #####
 ’MSC’ - Mean component area (Pascual-Hortal and Saura, 2006). Threshold dependent 
 (dispersal distance).
 
@@ -64,7 +64,7 @@ distance defined by the user. Does not depend on any distance threshold (probabi
  
 ##### Integral index of connectivity #####
 ’IIC’ - Integral index of connectivity. Index developed specifically for landscapes 
-by PascualHortal and Saura (2006). It is based on habitat availability and on a 
+by Pascual-Hortal and Saura (2006). It is based on habitat availability and on a 
 binary connection model (as opposed to a probabilistic). It ranges from 0 to 1 
 (higher values indicating more connectivity). Threshold dependent (dispersal distance).
 
@@ -89,20 +89,6 @@ graph theory. Biological Conservation, 130(1): 70-83.
 Pascual-Hortal, L., and Saura, S. (2006). Comparison and development of new 
 graph-based landscape connectivity indices: towards the priorization of habitat 
 patches and corridors for conservation. Landscape Ecology, 21(7): 959-967.
-
-Saura, S., and Pascual-Hortal, L. (2007). A new habitat availability index to 
-integrate connectivity in landscape conservation planning: comparison with 
-existing indices and application to a case study. Landscape and Urban Planning, 
-83(2): 91-103.
-
-Saura, S., Estreguil, C., Mouton, C. & Rodriguez-Freire, M. (2011a). Network 
-analysis to assess landscape connectivity trends: application to European 
-forests (1990-2000). Ecological Indicators 11: 407-416.
-
-Saura, S., Gonzalez-Avila, S. & Elena-Rossello, R. (2011b). Evaluacion de los 
-cambios en la conectividad de los bosques: el indice del area conexa equivalente 
-y su aplicacion a los bosques de Castilla y Leon. Montes, Revista de Ambito 
-Forestal 106: 15-21.
 
 Urban, D., and Keitt, T. (2001). Landscape connectivity: a graph-theoretic 
 perspective. Ecology, 82(5): 1205-1218.
