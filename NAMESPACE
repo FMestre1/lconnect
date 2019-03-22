@@ -3,8 +3,6 @@
 S3method(plot,lconnect)
 S3method(plot,pimp)
 export(con_metric)
-export(is.lconnect)
-export(is.pimp)
 export(patch_imp)
 export(upload_land)
 exportClasses(lconnect)

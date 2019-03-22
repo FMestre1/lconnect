@@ -46,8 +46,8 @@ network nodes (habitat patches) (Minor and Urban, 2008). The shorter the CPL
 value the more connected the patches are. Threshold dependent (dispersal distance).
 
 ##### Expected cluster size #####
-’ECS’ - Expected cluster (component) size. Mean cluster size of the clusters weighed 
-by area. (O’ Brien et al.,2006 and Fall et al, 2007). This represents the size 
+’ECS’ - Expected cluster (component) size. Mean cluster size of the clusters weighted 
+by area. (O’Brien et al.,2006 and Fall et al, 2007). This represents the size 
 of the component in which a randomly located point in an habitat patch would reside. 
 Although it is informative regarding the area of the component, it does not provide 
 any ecologically meaningful information regarding the total area of habitat, 

@@ -1,16 +1,80 @@
-#' con_metric
 #' @title Landscape connectivity metrics
 #' @description Calculates several landscape connectivity metrics
-#' @param landscape landscape object produced by upload.landscape
+#' @param landscape landscape object created by \code{\link{upload_land}}
 #' @param metric vector of landscape metrics to be computed. Can be one or more of
 #' the metrics currently available: "NC", "LNK", "SLC", "MSC", "CCP", "LCP",
 #' "CPL", "ECS", "AWF" and "IIC".  
 #' @usage con_metric(landscape, metric)
-#' @return vector with the selected metrics.
+#' @return vector with the landscape connectivity metrics selected.
 #' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
 #' habitat = 1, max_dist = 500)
 #' metrics <- con_metric(landscape, metric = c("NC", "LCP"))
+#' @details The connectivity metrics currently available are: 
+#' \itemize{
+#'   \item NC – Number of components (groups of interconnected patches) in the 
+#'   landscape (Urban and Keitt, 2001). Patches in the same component are 
+#'   considered to be accessible, while patches in different components are not.
+#'   Highly connected landscapes have less components. Threshold dependent,
+#'   i.e., maximum distance for two patches to be considered connected, which 
+#'   can be interpreted as the maximum dispersal distance for a certain species.
+#'   \item LNK – Number of links connecting the patches. The landscape is 
+#'   interpreted as binary, which means that the habitat patches are either
+#'   connected or not (Pascual-Hortal and Saura, 2006). Higher LNK implies 
+#'   higher connectivity. Threshold dependent, i.e., maximum distance for
+#'    two patches to be considered connected, which can be interpreted as 
+#'    the maximum dispersal distance for a certain species.
+#'   \item SLC – Area of the largest group of interconnected patches 
+#'   (Pascual-Hortal and Saura, 2006). Threshold dependent, i.e., maximum 
+#'   distance for two patches to be considered connected, which can be 
+#'   interpreted as the maximum dispersal distance for a certain species.
+#'   \item MSC – Mean area of interconnected patches 
+#'   (Pascual-Hortal and Saura, 2006). Threshold dependent, i.e., maximum 
+#'   distance for two patches to be considered connected, which can be 
+#'   interpreted as the maximum dispersal distance for a certain species. 
+#'   \item CCP – Class coincidence probability. It is defined as the probability 
+#'   that two randomly chosen points within the habitat belong to the same 
+#'   component (or cluster). Ranges between 0 and 1 (Pascual-Hortal and 
+#'   Saura 2006). Higher CCP implies higher connectivity. Threshold dependent, 
+#'   i.e., maximum distance for two patches to be considered connected, which 
+#'   can be interpreted as the maximum dispersal distance for a certain species. 
+#'   \item LCP – Landscape coincidence probability. It is defined as the 
+#'   probability that two randomly chosen points in the landscape (whether in 
+#'   an habitat patch or not) belong to the same habitat component (or cluster).
+#'    Ranges between 0 and 1 (Pascual-Hortal and Saura 2006). Threshold 
+#'    dependent, i.e., maximum distance for two patches to be considered 
+#'    connected, which can be interpreted as the maximum dispersal distance for a certain species.
+#'   \item CPL – Characteristic path length. Mean of all the shortest paths 
+#'   between the habitat patches (Minor and Urban, 2008). The shorter the CPL 
+#'   value the more connected the patches are. Threshold dependent, i.e., 
+#'   maximum distance for two patches to be considered connected, which can be 
+#'   interpreted as the maximum dispersal distance for a certain species. 
+#'   \item ECS – Expected component (or cluster) size. Mean cluster size of the 
+#'   clusters weighted by area. (O’Brien et al., 2006 and Fall et al, 2007).
+#'    This represents the size of the component in which a randomly located 
+#'    point in an habitat patch would reside. Although it is informative 
+#'    regarding the area of the component, it does not provide any ecologically 
+#'    meaningful information regarding the total area of habitat. As an example: 
+#'    ECS increases with less isolated small components or patches, although the 
+#'    total habitat decreases (Laita et al. 2011). Threshold dependent, i.e., 
+#'    maximum distance for two patches to be considered connected, which 
+#'    can be interpreted as the maximum dispersal distance for a certain species.
+#'   \item AWF – Area-weighted Flux. Evaluates the flow, weighted by area, 
+#'   between all pairs of patches (Bunn et al. 2000 and Urban and Keitt 2001). 
+#'   The probability of dispersal between two patches, was computed using 
+#'   pij=exp(-k * dij), where k is a constant making pij (the dispersal 
+#'   probability between patches) 50% at half the dispersal distance 
+#'   defined by the user. Although k, as was implemented, is dependent on 
+#'   the dispersal distance, AWF is a probabilistic index and not 
+#'   directly dependent on the threshold. 
+#'   \item IIC – Integral index of connectivity. Index developed specifically 
+#'   for landscapes by Pascual-Hortal and Saura (2006). It is based on habitat 
+#'   availability and on a binary connection model (as opposed to a 
+#'   probabilistic). It ranges from 0 to 1 (higher values indicating more 
+#'   connectivity). Threshold dependent, i.e., maximum distance for two patches 
+#'   to be considered connected, which can be interpreted as the maximum 
+#'   dispersal distance for a certain species.
+#'   }
 #' @references Bunn, A. G., Urban, D. L., and Keitt, T. H. (2000). Landscape connectivity: a conservation application of graph theory. Journal of Environmental Management, 59(4): 265-278.
 #' @references Fall, A., Fortin, M. J., Manseau, M., and O' Brien, D. (2007). Spatial graphs: principles and applications for habitat connectivity. Ecosystems, 10(3): 448-461.
 #' @references Laita, A., Kotiaho, J.S., Monkkonen, M. (2011). Graph-theoretic connectivity measures: what do they tell us about connectivity? Landscape Ecology, 26: 951-967.

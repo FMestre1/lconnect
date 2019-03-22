@@ -1,4 +1,3 @@
-#' upload_land
 #' @title Import and convert a shapefile to a lconnect object
 #' @description Import and convert a shapefile to a lconnect object. Some
 #' landscape and patch metrics which are the core of landscape connectivity
@@ -12,7 +11,7 @@
 #' @param max_dist numeric indicating the maximum distance between patches in 
 #' the same cluster. 
 #' @usage upload_land(land_path, bound_path = NULL, habitat, max_dist = NULL)
-#' @return returns an object of class "lconnect". This object is a list with the
+#' @return an object of class "lconnect". This object is a list with the
 #' following values:
 #' \item{landscape}{spatial polygon object of class "sf" with cluster identity of each polygon}
 #' \item{max_dist}{numeric indicating the maximum distance between patches of the same cluster}

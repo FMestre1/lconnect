@@ -1,6 +1,3 @@
-#' @title Compute auxiliary metrics
-#' @param object object of class sf or sfc
-#' @param min_dist numeric indicating species dispersion
 #' @keywords internal
 component_calc <- function(object, distance, min_dist = NULL){
 if(is.null(min_dist)){

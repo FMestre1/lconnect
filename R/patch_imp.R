@@ -1,16 +1,23 @@
-#' patch_imp
-#' @title Prioritization of patches according to individual contribution
+#' @title Prioritization of patches
 #' @description Prioritization of patches according to individual contribution 
-#' to overall connectivity. Each patch is removed at a time and connectivity 
-#' metrics are calculated without that specific patch. The current version only 
-#' allows the use of IIC.
-#' @param landscape lconnect object produced by upload_land()
-#' @param metric string indicating the landscape metric to use in the prioritization
-#' @param vector_out TRUE/FALSE
+#' to overall connectivity. 
+#' @param landscape lconnect object created by \code{\link{upload_land}}
+#' @param metric string indicating the connectivity metric to use in the 
+#' prioritization
+#' @param vector_out TRUE/FALSE indicating if the resulting spatial object 
+#' should be recorded to file
 #' @usage patch_imp(landscape, metric, vector_out = F)
-#' @return Returns a vector depicting each patch's importance to overall 
-#' connectivity.
-#' @references #' Saura, S., Pascual-Hortal, L. (2007). A new habitat 
+#' @return an object of class "pimp". This object is a list with the
+#' following values:
+#' \item{landscape}{spatial polygon object of class "sf" with cluster identity 
+#' and importance of each polygon}
+#' \item{prioritization}{vector with patch importance}
+#' @details Each patch is removed at a time and connectivity 
+#' metrics are recalculated without that specific patch. Patch importance value
+#' indicates the percentage of reduction in the connectivity metric that the 
+#' loss of that patch represents in the landscape. The current version only 
+#' allows the use of IIC.
+#' @references Saura, S., Pascual-Hortal, L. (2007). A new habitat 
 #' availability index to integrate connectivity in landscape conservation planning: 
 #' Comparison with existing indices and application to a case study. Landscape and
 #' Urban Planning, 83(2-3):91-103.

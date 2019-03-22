@@ -1,13 +1,12 @@
 Package: lconnect
-Title: Simple tools to derive landscape connectivity metrics
+Title: Simple Tools to Calculate Landscape Connectivity Metrics
 Version: 0.1.0
 Authors@R: c(
     person("Frederico", "Mestre", email = "mestre.frederico@gmail.com", role = c("aut","cre")),
     person("Bruno", "Silva", email = "bmsasilva@gmail.com", role = "aut"))
-Description: Simple tools to derive landscape connectivity
-    metrics. The objective of this package is to 
-    provide the simplest possible approach to derive 
-    landscape connectivity metrics.
+Description: Simple tools to calculate landscape connectivity metrics. The objective 
+    of this package is to provide a simple to use approach to calculate landscape 
+    connectivity metrics.
 Depends: R (>= 3.4.4)
 License: GPL-3
 Encoding: UTF-8
@@ -15,4 +14,5 @@ LazyData: true
 Imports: 
     sf,
     igraph
+BugReports: https://github.com/FMestre1/lconnect/issues
 RoxygenNote: 6.1.1
