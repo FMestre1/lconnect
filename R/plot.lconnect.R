@@ -7,6 +7,8 @@
 #' @return Nothing. Side-effect: plots graphs.
 #' @method plot lconnect
 #' @S3method plot lconnect
+#' @author Bruno Silva
+#' @author Frederico Mestre
 plot.lconnect <- function(x, ...){
   x$landscape$clusters <- as.factor(x$landscape$clusters)
   graphics::plot(x$landscape,  key.pos = NULL ,border = NA, reset = F, ...)

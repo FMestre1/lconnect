@@ -5,7 +5,7 @@
 #' metrics are calculated without that specific patch. The current version only 
 #' allows the use of IIC.
 #' @param landscape lconnect object produced by upload_land()
-#' @param metric string indicating the landscape metric to use in the 
+#' @param metric string indicating the landscape metric to use in the prioritization
 #' @param vector_out TRUE/FALSE
 #' @usage patch_imp(landscape, metric, vector_out = F)
 #' @return Returns a vector depicting each patch's importance to overall 
@@ -16,7 +16,7 @@
 #' Urban Planning, 83(2-3):91-103.
 #' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
-#'                         habitat = 1, min_dist = 500)
+#'                         habitat = 1, max_dist = 500)
 #' importance <- patch_imp(landscape, metric = "IIC")
 #' plot(importance)
 #' @author Frederico Mestre

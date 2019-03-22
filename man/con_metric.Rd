@@ -25,7 +25,7 @@ con_metric
 \examples{
 vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 landscape <- upload_land(vec_path, bound_path = NULL,
-habitat = 1, min_dist = 500)
+habitat = 1, max_dist = 500)
 metrics <- con_metric(landscape, metric = c("NC", "LCP"))
 }
 \references{

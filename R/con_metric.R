@@ -9,7 +9,7 @@
 #' @return vector with the selected metrics.
 #' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
-#' habitat = 1, min_dist = 500)
+#' habitat = 1, max_dist = 500)
 #' metrics <- con_metric(landscape, metric = c("NC", "LCP"))
 #' @references Bunn, A. G., Urban, D. L., and Keitt, T. H. (2000). Landscape connectivity: a conservation application of graph theory. Journal of Environmental Management, 59(4): 265-278.
 #' @references Fall, A., Fortin, M. J., Manseau, M., and O' Brien, D. (2007). Spatial graphs: principles and applications for habitat connectivity. Ecosystems, 10(3): 448-461.
@@ -31,11 +31,11 @@ con_metric <- function(landscape, metric) {
     call. = FALSE)
   }
   aux <- component_calc(landscape$landscape, landscape$distance, 
-                        landscape$min_dist)
+                        landscape$max_dist)
   clusters <- aux$clusters
   area_c <- as.numeric(aux$area_c)
   area_l <- as.numeric(landscape$area_l)
-  min_dist <- landscape$min_dist
+  max_dist <- landscape$max_dist
   distance <- landscape$distance
   NC <- max(clusters)
   result <- c()
@@ -45,7 +45,7 @@ con_metric <- function(landscape, metric) {
   }
   if("LNK" %in% metric)
   {
-    result <- c(result, LNK = sum(distance < min_dist))
+    result <- c(result, LNK = sum(distance < max_dist))
   }
     if("SLC" %in% metric)
   {
@@ -94,7 +94,7 @@ con_metric <- function(landscape, metric) {
   {
     d1 <- upper.tri(as.matrix(distance))*as.matrix(distance)
     d1[d1==0]<-NA
-    e1 <- as.data.frame(which(d1 < min_dist, arr.ind = TRUE, useNames = FALSE))
+    e1 <- as.data.frame(which(d1 < max_dist, arr.ind = TRUE, useNames = FALSE))
     g1 <- igraph::graph_from_data_frame(e1, directed = FALSE)
     short_p <- igraph::shortest.paths(g1)
     n_links <- (sum(!is.infinite(short_p)) - nrow(short_p))/2
@@ -117,7 +117,7 @@ con_metric <- function(landscape, metric) {
   }
   if("AWF" %in% metric)
   {
-    k <- -(log(0.5) / (min_dist / 2))
+    k <- -(log(0.5) / (max_dist / 2))
     out <- matrix(NA, nrow = length(area_c), ncol = length(area_c))
     for(i in 1:length(area_c)){
       for(j in 1:length(area_c)){
@@ -132,7 +132,7 @@ con_metric <- function(landscape, metric) {
   {
     d1 <- upper.tri(as.matrix(distance)) * as.matrix(distance)
     d1[d1 == 0] <- NA
-    e1 <- as.data.frame(which(d1 < min_dist, arr.ind = TRUE, useNames = FALSE))
+    e1 <- as.data.frame(which(d1 < max_dist, arr.ind = TRUE, useNames = FALSE))
     e2 <- cbind(e1[, 2], e1[, 1])
     g1 <- igraph::graph_from_data_frame(e1, directed = FALSE)
     short_p <- igraph::shortest.paths(g1)

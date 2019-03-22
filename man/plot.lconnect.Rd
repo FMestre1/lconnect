@@ -21,3 +21,8 @@ Aditional arguments accepted by plot() or plot.sf() can be included.
 \details{
 plot.lconnect
 }
+\author{
+Bruno Silva
+
+Frederico Mestre
+}

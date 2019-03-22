@@ -4,7 +4,7 @@
 \alias{upload_land}
 \title{Import and convert a shapefile to a lconnect object}
 \usage{
-upload_land(land_path, bound_path = NULL, habitat, min_dist = NULL)
+upload_land(land_path, bound_path = NULL, habitat, max_dist = NULL)
 }
 \arguments{
 \item{land_path}{string, indicating the full path of the landscape shapefile.}
@@ -15,10 +15,18 @@ If NULL (default option) a convex hull will be created and used as boundary.}
 \item{habitat}{vector with habitat categories. The categories can be numeric
 or character.}
 
-\item{min_dist}{numeric indicating the minimum distance to aggregate patches.}
+\item{max_dist}{numeric indicating the maximum distance between patches in 
+the same cluster.}
 }
 \value{
-A lconnect object is returned.
+returns an object of class "lconnect". This object is a list with the
+following values:
+\item{landscape}{spatial polygon object of class "sf" with cluster identity of each polygon}
+\item{max_dist}{numeric indicating the maximum distance between patches of the same cluster}
+\item{clusters}{numeric vector indicating cluster identity of each polygon}
+\item{distance}{object of class "dist" with eucledian distances between all pairs of polygons}
+\item{boundary}{spatial polygon of class "sfc" representing the boundary of the landscape}
+\item{area_l}{numeric with the total area of the boundary, in square units of landscape units}
 }
 \description{
 Import and convert a shapefile to a lconnect object. Some
@@ -32,7 +40,7 @@ upload_land
 \examples{
 vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 landscape <- upload_land(vec_path, bound_path = NULL,
-habitat = 1, min_dist = 500)
+habitat = 1, max_dist = 500)
 plot(landscape)
 }
 \author{

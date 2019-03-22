@@ -23,3 +23,8 @@ Aditional arguments accepted by plot() or plot.sf() can be included.
 \details{
 plot.pimp
 }
+\author{
+Bruno Silva
+
+Frederico Mestre
+}

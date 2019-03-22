@@ -9,7 +9,7 @@ patch_imp(landscape, metric, vector_out = F)
 \arguments{
 \item{landscape}{lconnect object produced by upload_land()}
 
-\item{metric}{string indicating the landscape metric to use in the}
+\item{metric}{string indicating the landscape metric to use in the prioritization}
 
 \item{vector_out}{TRUE/FALSE}
 }
@@ -29,7 +29,7 @@ patch_imp
 \examples{
 vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 landscape <- upload_land(vec_path, bound_path = NULL,
-                        habitat = 1, min_dist = 500)
+                        habitat = 1, max_dist = 500)
 importance <- patch_imp(landscape, metric = "IIC")
 plot(importance)
 }

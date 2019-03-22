@@ -8,6 +8,8 @@
 #' @return Nothing. Side-effect: plots graphs.
 #' @method plot pimp
 #' @S3method plot pimp
+#' @author Bruno Silva
+#' @author Frederico Mestre
 plot.pimp <- function(x, ..., main){
   if(missing(main)){
     main <- "Importance (%)"
