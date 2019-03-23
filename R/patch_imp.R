@@ -31,37 +31,32 @@
 #' @export
 #' @exportClass lconnect
 
-patch_imp <- function(landscape, metric, vector_out = F)
-{
-  if (!is.lconnect(landscape)) 
-  {
-    stop(paste0("Landscape must be an object of class 'lconnect'."),
+patch_imp <- function(landscape, metric, vector_out = F) {
+  if (!is.lconnect(landscape)) {
+    stop(paste0("Landscape must be an object of class 'lconnect'"),
          call. = FALSE)
   }
-  
-  if (metric!="IIC") 
-  {
-    stop(paste0("The argument 'metric' must use only the IIC metric."),
+  if (metric != "IIC") {
+    stop(paste0("The argument 'metric' must be 'IIC'"),
          call. = FALSE)
   }
   full_conn <- con_metric(landscape, metric)
   npatch <- length(landscape$landscape$geometry)
-  dCONN <- rep(NA, npatch)
-  for (i in 1:npatch){
+  dconn <- rep(NA, npatch)
+  for (i in 1:npatch) {
     land1 <- remove_patch(landscape, i)
-    partial_conn <- as.numeric(con_metric(landscape=land1, metric))
-    dCONN[i] <- 100*((full_conn - partial_conn) / full_conn)
+    partial_conn <- as.numeric(con_metric(landscape = land1, metric))
+    dconn[i] <- 100 * ( (full_conn - partial_conn) / full_conn )
   }
-  landscape$landscape$attributes<-dCONN
-  if (vector_out){
-    sf::st_write(landscape$landscape, "patches.shp",quiet = TRUE, 
+  landscape$landscape$attributes <- dconn
+  if (vector_out) {
+    sf::st_write(landscape$landscape, "patches.shp", quiet = TRUE,
                  driver = "ESRI Shapefile", delete_layer = TRUE)
     message("The vector file with the information on patch prioritization
-            was saved to the working directory!")  
+            was saved to the working directory!")
   }
-  result <- list(landscape = landscape$landscape, prioritization = dCONN)
-  class(result)<- "pimp"
-  print(dCONN)
+  result <- list(landscape = landscape$landscape, prioritization = dconn)
+  class(result) <- "pimp"
+  print(dconn)
   return(result)
 }
-

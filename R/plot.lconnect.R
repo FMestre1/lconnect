@@ -13,7 +13,6 @@
 #' @author Frederico Mestre
 plot.lconnect <- function(x, ...){
   x$landscape$clusters <- as.factor(x$landscape$clusters)
-  graphics::plot(x$landscape,  key.pos = NULL ,border = NA, reset = F, ...)
+  graphics::plot(x$landscape,  key.pos = NULL, border = NA, reset = F, ...)
   graphics::plot(x$boundary,  add = T, border = "grey", ...)
 }
-

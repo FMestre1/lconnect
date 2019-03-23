@@ -15,10 +15,9 @@
 #' loss of that patch represents in the landscape. Aditional arguments accepted
 #' by \code{\link[graphics]{plot}} or \code{\link[sf]{plot.sf}} can be included.
 plot.pimp <- function(x, ..., main){
-  if(missing(main)){
+  if (missing(main)) {
     main <- "Importance (%)"
   }
-  cols <- length(x$prioritization)
   graphics::plot(x$landscape["attributes"], border = NA,
                  main = main, ...)
 }

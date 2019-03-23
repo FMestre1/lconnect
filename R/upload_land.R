@@ -29,9 +29,9 @@
 #' @exportClass lconnect
 upload_land <- function(land_path, bound_path = NULL, habitat, max_dist = NULL){
   landscape <- sf::st_read(land_path, quiet = T)
-  landscape <- landscape[landscape[[1]] == habitat,]
+  landscape <- landscape[landscape[[1]] == habitat, ]
   landscape <- sf::st_union(landscape)
-  if(is.null(bound_path)){
+  if (is.null(bound_path)) {
     boundary <- sf::st_convex_hull(landscape)
   } else{
     boundary <- sf::st_read(bound_path, quiet = T)
@@ -41,10 +41,10 @@ upload_land <- function(land_path, bound_path = NULL, habitat, max_dist = NULL){
   distance <- sf::st_distance(landscape)
   distance <- stats::as.dist(distance)
   aux <- component_calc(landscape, distance, max_dist)
-  landscape <- suppressWarnings(sf::st_sf(clusters = aux$clusters, 
+  landscape <- suppressWarnings(sf::st_sf(clusters = aux$clusters,
                                       geometry = landscape))
-  object <- list(landscape = landscape, max_dist = max_dist, 
-                 clusters = aux$clusters, distance = distance, 
+  object <- list(landscape = landscape, max_dist = max_dist,
+                 clusters = aux$clusters, distance = distance,
                  boundary = boundary, area_l = area_l)
   class(object) <- "lconnect"
   return(object)
