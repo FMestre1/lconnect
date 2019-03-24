@@ -31,13 +31,17 @@
 #' @export
 #' @exportClass lconnect
 
-patch_imp <- function(landscape, metric, vector_out = F) {
+patch_imp <- function(landscape, metric, vector_out = FALSE) {
   if (!is.lconnect(landscape)) {
     stop(paste0("Landscape must be an object of class 'lconnect'"),
          call. = FALSE)
   }
   if (metric != "IIC") {
     stop(paste0("The argument 'metric' must be 'IIC'"),
+         call. = FALSE)
+  }
+  if (!is.logical(vector_out)) {
+    stop(paste0("The argument 'vector_out' must be logical (TRUE/FALSE)"),
          call. = FALSE)
   }
   full_conn <- con_metric(landscape, metric)

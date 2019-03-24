@@ -1,16 +1,16 @@
 #' @title Landscape connectivity metrics
-#' @description Calculates several landscape connectivity metrics
-#' @param landscape landscape object created by \code{\link{upload_land}}
-#' @param metric vector of landscape metrics to be computed. Can be one or more of
+#' @description Funtion to compute several landscape connectivity metrics
+#' @param landscape Object of class 'lconnect' created by \code{\link{upload_land()}}.
+#' @param metric Character vector of landscape metrics to be computed. Can be one or more of
 #' the metrics currently available: "NC", "LNK", "SLC", "MSC", "CCP", "LCP",
 #' "CPL", "ECS", "AWF" and "IIC".  
 #' @usage con_metric(landscape, metric)
-#' @return vector with the landscape connectivity metrics selected.
+#' @return Numeric vector with the landscape connectivity metrics selected.
 #' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
 #' habitat = 1, max_dist = 500)
 #' metrics <- con_metric(landscape, metric = c("NC", "LCP"))
-#' @details The connectivity metrics currently available are: 
+#' @details The landscape connectivity metrics currently available are: 
 #' \itemize{
 #'   \item NC – Number of components (groups of interconnected patches) in the 
 #'   landscape (Urban and Keitt, 2001). Patches in the same component are 
@@ -90,12 +90,12 @@
 #' @export
 con_metric <- function(landscape, metric) {
   if (class(landscape) != "lconnect") {
-    stop("landscape must be an object of class 'lconnect'",
+    stop("Argument landscape must be an object of class 'lconnect'",
          call. = FALSE)
   }
   if (x %in% c("NC", "LNK", "SLC", "MSC", "CCP", "LCP", "CPL",
-               "ECS", "AWF", "IIC") == F){
-    stop("metric must be one of 'NC', 'LNK', 'SLC', 'MSC', 'CCP', 'LCP', 'CPL',
+               "ECS", "AWF", "IIC") == FALSE){
+    stop("Argument metric must be one of: 'NC', 'LNK', 'SLC', 'MSC', 'CCP', 'LCP', 'CPL',
       'ECS', 'AWF' or 'IIC'", call. = FALSE)
   }
   aux <- component_calc(landscape$landscape, landscape$distance,
@@ -174,8 +174,8 @@ con_metric <- function(landscape, metric) {
   if ("AWF" %in% metric) {
     k <- -log(0.5) / (max_dist / 2)
     out <- matrix(NA, nrow = length(area_c), ncol = length(area_c))
-    for (i in 1:length(area_c)) {
-      for (j in 1:length(area_c)) {
+    for (i in seq_len(area_c)) {
+      for (j in seq_len(area_c)) {
         prob <- exp(-k * (as.matrix(distance)[i, j])) * area_c[i] * area_c[j]
         out[i, j] <- prob
       }

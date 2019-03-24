@@ -28,6 +28,32 @@
 #' @export
 #' @exportClass lconnect
 upload_land <- function(land_path, bound_path = NULL, habitat, max_dist = NULL){
+  if (!is.character(land_path)) {
+    stop(paste0("Argument 'land_path' must be a string"),
+         call. = FALSE)
+  }
+  if (!utils::file_test("-f", land_path)) {
+    stop(paste0("Argument 'land_path' doesn't seem to be a valid file"),
+         call. = FALSE)
+  }
+  if (!is.character(bound_path) & !is.null(bound_path)) {
+    stop(paste0("Argument 'bound_path' must be NULL or a string"),
+         call. = FALSE)
+  }
+  if (is.character(bound_path)) {
+    if (!utils::file_test(bound_path)) {
+      stop(paste0("Argument 'bound_path' doesn't seem to be a valid file"),
+           call. = FALSE)
+    }
+  }
+  if (!is.numeric(max_dist) & !is.null(max_dist)) {
+    stop(paste0("Argument 'max_dist' must be NULL or numeric"),
+         call. = FALSE)
+  }
+  if (length(max_dist) > 1) {
+    stop(paste0("Argument 'max_dist' must be a single number"),
+         call. = FALSE)
+  }
   landscape <- sf::st_read(land_path, quiet = T)
   landscape <- landscape[landscape[[1]] == habitat, ]
   landscape <- sf::st_union(landscape)
