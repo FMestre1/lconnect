@@ -1,6 +1,6 @@
 #' @title Landscape connectivity metrics
-#' @description Funtion to compute several landscape connectivity metrics
-#' @param landscape Object of class 'lconnect' created by \code{\link{upload_land()}}.
+#' @description Compute several landscape connectivity metrics.
+#' @param landscape Object of class 'lconnect' created by \code{\link{upload_land}}.
 #' @param metric Character vector of landscape metrics to be computed. Can be one or more of
 #' the metrics currently available: "NC", "LNK", "SLC", "MSC", "CCP", "LCP",
 #' "CPL", "ECS", "AWF" and "IIC".  
@@ -83,7 +83,7 @@
 #' @references Pascual-Hortal, L., and Saura, S. (2006). Comparison and development of new graph-based landscape connectivity indices: towards the priorization of habitat patches and corridors for conservation. Landscape Ecology, 21(7): 959-967. 
 #' @references Saura, S., and Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: comparison with existing indices and application to a case study. Landscape and Urban Planning, 83(2): 91-103. 
 #' @references Saura, S., Estreguil, C., Mouton, C. & Rodriguez-Freire, M. (2011a). Network analysis to assess landscape connectivity trends: application to European forests (1990-2000). Ecological Indicators 11: 407-416.
-#' @references Saura, S., Gonzalez-Avila, S. & Elena-Rossello, R. (2011b). Evaluacion de los cambios en la conectividad de los bosques: el indice del area conexa equivalente y su aplicacion a los bosques de Castilla y Leon. Montes, Revista de Ambito Forestal 106: 15-21
+#' @references Saura, S., Gonzalez-Avila, S. & Elena-Rossello, R. (2011b). Evaluacion de los cambios en la conectividad de los bosques: el indice del area conexa equivalente y su aplicacion a los bosques de Castilla y Leon. Montes, Revista de Âmbito Forestal 106: 15-21
 #' @references Urban, D., and Keitt, T. (2001). Landscape connectivity: a graph-theoretic perspective. Ecology, 82(5): 1205-1218.
 #' @author Frederico Mestre
 #' @author Bruno Silva
@@ -93,10 +93,10 @@ con_metric <- function(landscape, metric) {
     stop("Argument landscape must be an object of class 'lconnect'",
          call. = FALSE)
   }
-  if (x %in% c("NC", "LNK", "SLC", "MSC", "CCP", "LCP", "CPL",
-               "ECS", "AWF", "IIC") == FALSE){
-    stop("Argument metric must be one of: 'NC', 'LNK', 'SLC', 'MSC', 'CCP', 'LCP', 'CPL',
-      'ECS', 'AWF' or 'IIC'", call. = FALSE)
+  if (metric %in% c("NC", "LNK", "SLC", "MSC", "CCP", "LCP", "CPL",
+                       "ECS", "AWF", "IIC") == FALSE){
+    stop("Argument metric must be one of: 'NC', 'LNK', 'SLC', 'MSC', 'CCP',
+'LCP', 'CPL', 'ECS', 'AWF' or 'IIC'", call. = FALSE)
   }
   aux <- component_calc(landscape$landscape, landscape$distance,
                         landscape$max_dist)

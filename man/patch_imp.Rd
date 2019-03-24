@@ -4,23 +4,23 @@
 \alias{patch_imp}
 \title{Prioritization of patches}
 \usage{
-patch_imp(landscape, metric, vector_out = F)
+patch_imp(landscape, metric, vector_out = FALSE)
 }
 \arguments{
-\item{landscape}{lconnect object created by \code{\link{upload_land}}}
+\item{landscape}{Object of class "lconnect" created by \code{\link{upload_land}}.}
 
-\item{metric}{string indicating the connectivity metric to use in the 
-prioritization}
+\item{metric}{String indicating the connectivity metric to use in the 
+prioritization.}
 
 \item{vector_out}{TRUE/FALSE indicating if the resulting spatial object 
-should be recorded to file}
+should be recorded to file.}
 }
 \value{
-an object of class "pimp". This object is a list with the
+An object of class "pimp". This object is a list with the
 following values:
-\item{landscape}{spatial polygon object of class "sf" with cluster identity 
-and importance of each polygon}
-\item{prioritization}{vector with patch importance}
+\item{landscape}{Spatial polygon object of class "sf" (package "sf") with 
+cluster identity and importance of each polygon.}
+\item{prioritization}{Vector with patch importance in percentage.}
 }
 \description{
 Prioritization of patches according to individual contribution 

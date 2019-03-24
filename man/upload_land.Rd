@@ -2,40 +2,46 @@
 % Please edit documentation in R/upload_land.R
 \name{upload_land}
 \alias{upload_land}
-\title{Import and convert a shapefile to a lconnect object}
+\title{Import and convert a shapefile to an object of class "lconnect"}
 \usage{
 upload_land(land_path, bound_path = NULL, habitat, max_dist = NULL)
 }
 \arguments{
-\item{land_path}{string, indicating the full path of the landscape shapefile.}
+\item{land_path}{String indicating the full path of the landscape shapefile.}
 
-\item{bound_path}{string, indicating the full path of the boundary shapefile.
+\item{bound_path}{String indicating the full path of the boundary shapefile.
 If NULL (default option) a convex hull will be created and used as boundary.}
 
-\item{habitat}{vector with habitat categories. The categories can be numeric
+\item{habitat}{Vector with habitat categories. The categories can be numeric
 or character.}
 
-\item{max_dist}{numeric indicating the maximum distance between patches in 
+\item{max_dist}{Numeric indicating the maximum distance between patches in 
 the same cluster.}
 }
 \value{
-an object of class "lconnect". This object is a list with the
+An object of class "lconnect". This object is a list with the
 following values:
-\item{landscape}{spatial polygon object of class "sf" with cluster identity of each polygon}
-\item{max_dist}{numeric indicating the maximum distance between patches of the same cluster}
-\item{clusters}{numeric vector indicating cluster identity of each polygon}
-\item{distance}{object of class "dist" with eucledian distances between all pairs of polygons}
-\item{boundary}{spatial polygon of class "sfc" representing the boundary of the landscape}
-\item{area_l}{numeric with the total area of the boundary, in square units of landscape units}
+\item{landscape}{Spatial polygon object of class "sf" (package "sf") with 
+cluster membership of each polygon.}
+\item{max_dist}{Numeric indicating the maximum distance between patches 
+of the same cluster.}
+\item{clusters}{Numeric vector indicating cluster identity of each polygon.}
+\item{distance}{Object of class "dist" (package "stats") with eucledian 
+distances between all pairs of polygons.}
+\item{boundary}{Spatial polygon of class "sfc" (package "sf") representing 
+the boundary of the landscape.}
+\item{area_l}{Numeric with the total area of the boundary, in square units 
+of landscape units.}
 }
 \description{
-Import and convert a shapefile to a lconnect object. Some
-landscape and patch metrics which are the core of landscape connectivity
+Import and convert a shapefile to an object of class "lconnect". 
+Some landscape and patch metrics which are the core of landscape connectivity
 metrics are calculated. The shapefile must be projected, i.e., in planar 
-coordinates and the first field must be contain the habitat categories.
+coordinates and the first field must contain the habitat categories.
 }
 \examples{
-vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
+vec_path <- system.file("extdata/vec_projected.shp", 
+package = "lconnect")
 landscape <- upload_land(vec_path, bound_path = NULL,
 habitat = 1, max_dist = 500)
 plot(landscape)

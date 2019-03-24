@@ -7,20 +7,20 @@
 con_metric(landscape, metric)
 }
 \arguments{
-\item{landscape}{landscape object created by \code{\link{upload_land}}}
+\item{landscape}{Object of class 'lconnect' created by \code{\link{upload_land}}.}
 
-\item{metric}{vector of landscape metrics to be computed. Can be one or more of
+\item{metric}{Character vector of landscape metrics to be computed. Can be one or more of
 the metrics currently available: "NC", "LNK", "SLC", "MSC", "CCP", "LCP",
 "CPL", "ECS", "AWF" and "IIC".}
 }
 \value{
-vector with the landscape connectivity metrics selected.
+Numeric vector with the landscape connectivity metrics selected.
 }
 \description{
-Calculates several landscape connectivity metrics
+Compute several landscape connectivity metrics.
 }
 \details{
-The connectivity metrics currently available are: 
+The landscape connectivity metrics currently available are: 
 \itemize{
   \item NC – Number of components (groups of interconnected patches) in the 
   landscape (Urban and Keitt, 2001). Patches in the same component are 
@@ -109,7 +109,7 @@ Saura, S., and Pascual-Hortal, L. (2007). A new habitat availability index to in
 
 Saura, S., Estreguil, C., Mouton, C. & Rodriguez-Freire, M. (2011a). Network analysis to assess landscape connectivity trends: application to European forests (1990-2000). Ecological Indicators 11: 407-416.
 
-Saura, S., Gonzalez-Avila, S. & Elena-Rossello, R. (2011b). Evaluacion de los cambios en la conectividad de los bosques: el indice del area conexa equivalente y su aplicacion a los bosques de Castilla y Leon. Montes, Revista de Ambito Forestal 106: 15-21
+Saura, S., Gonzalez-Avila, S. & Elena-Rossello, R. (2011b). Evaluacion de los cambios en la conectividad de los bosques: el indice del area conexa equivalente y su aplicacion a los bosques de Castilla y Leon. Montes, Revista de Âmbito Forestal 106: 15-21
 
 Urban, D., and Keitt, T. (2001). Landscape connectivity: a graph-theoretic perspective. Ecology, 82(5): 1205-1218.
 }

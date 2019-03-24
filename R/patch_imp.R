@@ -1,17 +1,17 @@
 #' @title Prioritization of patches
 #' @description Prioritization of patches according to individual contribution 
 #' to overall connectivity. 
-#' @param landscape lconnect object created by \code{\link{upload_land}}
-#' @param metric string indicating the connectivity metric to use in the 
-#' prioritization
+#' @param landscape Object of class "lconnect" created by \code{\link{upload_land}}.
+#' @param metric String indicating the connectivity metric to use in the 
+#' prioritization.
 #' @param vector_out TRUE/FALSE indicating if the resulting spatial object 
-#' should be recorded to file
-#' @usage patch_imp(landscape, metric, vector_out = F)
-#' @return an object of class "pimp". This object is a list with the
+#' should be recorded to file.
+#' @usage patch_imp(landscape, metric, vector_out = FALSE)
+#' @return An object of class "pimp". This object is a list with the
 #' following values:
-#' \item{landscape}{spatial polygon object of class "sf" with cluster identity 
-#' and importance of each polygon}
-#' \item{prioritization}{vector with patch importance}
+#' \item{landscape}{Spatial polygon object of class "sf" (package "sf") with 
+#' cluster identity and importance of each polygon.}
+#' \item{prioritization}{Vector with patch importance in percentage.}
 #' @details Each patch is removed at a time and connectivity 
 #' metrics are recalculated without that specific patch. Patch importance value
 #' indicates the percentage of reduction in the connectivity metric that the 
@@ -30,7 +30,6 @@
 #' @author Bruno Silva
 #' @export
 #' @exportClass lconnect
-
 patch_imp <- function(landscape, metric, vector_out = FALSE) {
   if (!is.lconnect(landscape)) {
     stop(paste0("Landscape must be an object of class 'lconnect'"),

@@ -5,7 +5,7 @@ based on their contribution to overall connectivity.
 The objective of this package is to provide the simplest possible approach to derive 
 landscape connectivity metrics.
 
-# These are the lanscape connectivity metrics currently provided:
+# These are the landscape connectivity metrics currently provided:
 
 ##### Number of components #####
 ’NC’ - Number of components (groups of interconnected patches) in the landscape (Urban
