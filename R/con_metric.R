@@ -93,8 +93,8 @@ con_metric <- function(landscape, metric) {
     stop("Argument landscape must be an object of class 'lconnect'",
          call. = FALSE)
   }
-  if (metric %in% c("NC", "LNK", "SLC", "MSC", "CCP", "LCP", "CPL",
-                       "ECS", "AWF", "IIC") == FALSE){
+  if (!all(metric %in% c("NC", "LNK", "SLC", "MSC", "CCP", "LCP", "CPL",
+                       "ECS", "AWF", "IIC"))){
     stop("Argument metric must be one of: 'NC', 'LNK', 'SLC', 'MSC', 'CCP',
 'LCP', 'CPL', 'ECS', 'AWF' or 'IIC'", call. = FALSE)
   }
