@@ -95,7 +95,7 @@ con_metric <- function(landscape, metric) {
   }
   if (!all(metric %in% c("NC", "LNK", "SLC", "MSC", "CCP", "LCP", "CPL",
                        "ECS", "AWF", "IIC"))){
-    stop("Argument metric must be one of: 'NC', 'LNK', 'SLC', 'MSC', 'CCP',
+    stop("Argument metric must be one or more of: 'NC', 'LNK', 'SLC', 'MSC', 'CCP',
 'LCP', 'CPL', 'ECS', 'AWF' or 'IIC'", call. = FALSE)
   }
   aux <- component_calc(landscape$landscape, landscape$distance,
