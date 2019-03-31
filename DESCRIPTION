@@ -4,9 +4,12 @@ Version: 0.1.0
 Authors@R: c(
     person("Frederico", "Mestre", email = "mestre.frederico@gmail.com", role = c("aut","cre")),
     person("Bruno", "Silva", email = "bmsasilva@gmail.com", role = "aut"))
-Description: Simple tools to compute landscape connectivity metrics. The objective 
-    of this package is to provide a simple to use approach to compute landscape 
-    connectivity metrics.
+Description: This package provides functions to upload vectorial data and derive
+landscape connectivity metrics in habitat/matrix systems. Additionally, it 
+provides an approach to assess individual patch contribution to the overall 
+landscape connectivity, enabling the prioritization of patches. The computation 
+of landscape connectivity and patch importance are very useful in Landscape 
+Ecology research.
 Depends: R (>= 3.4.0)
 License: GPL-3
 Encoding: UTF-8
