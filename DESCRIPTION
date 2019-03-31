@@ -7,7 +7,7 @@ Authors@R: c(
 Description: This package provides functions to upload vectorial data and derive
 landscape connectivity metrics in habitat/matrix systems. Additionally, it 
 provides an approach to assess individual patch contribution to the overall 
-landscape connectivity, enabling the prioritization of patches. The computation 
+landscape connectivity, enabling the prioritization of habitat patches. The computation 
 of landscape connectivity and patch importance are very useful in Landscape 
 Ecology research.
 Depends: R (>= 3.4.0)
