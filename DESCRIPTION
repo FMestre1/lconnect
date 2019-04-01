@@ -4,12 +4,18 @@ Version: 0.1.0
 Authors@R: c(
     person("Frederico", "Mestre", email = "mestre.frederico@gmail.com", role = c("aut","cre")),
     person("Bruno", "Silva", email = "bmsasilva@gmail.com", role = "aut"))
-Description: This package provides functions to upload vectorial data and derive
-landscape connectivity metrics in habitat/matrix systems. Additionally, it 
-provides an approach to assess individual patch contribution to the overall 
-landscape connectivity, enabling the prioritization of habitat patches. The 
-computation of landscape connectivity and patch importance are very useful 
-in Landscape Ecology research.
+Description: Provides functions to upload vectorial data and derive landscape
+    connectivity metrics in habitat or matrix systems. Additionally, includes an 
+    approach to assess individual patch contribution to the overall landscape 
+    connectivity, enabling the prioritization of habitat patches. The computation
+    of landscape connectivity and patch importance are very useful in Landscape 
+    Ecology research. The metrics available are: number of components, number of 
+    links, size of the largest component, mean size of components, class coincidence
+    probability, landscape coincidence probability, characteristic path length, 
+    expected cluster size, area-weighted flux and integral index of connectivity.
+    Pascual-Hortal, L., and Saura, S. (2006) <doi:10.1007/s10980-006-0013-z>
+    Urban, D., and Keitt, T. (2001) <doi:10.2307/2679983>
+    Laita, A., Kotiaho, J., Monkkonen, M. (2011) <doi:1007/s10980-011-9620-4>.
 Depends: R (>= 3.4.0)
 License: GPL-3
 Encoding: UTF-8
@@ -19,3 +25,4 @@ Imports:
     igraph
 BugReports: https://github.com/FMestre1/lconnect/issues
 RoxygenNote: 6.1.1
+

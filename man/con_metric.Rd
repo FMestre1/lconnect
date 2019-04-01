@@ -45,13 +45,13 @@ The landscape connectivity metrics currently available are:
   \item CCP – Class coincidence probability. It is defined as the probability 
   that two randomly chosen points within the habitat belong to the same 
   component (or cluster). Ranges between 0 and 1 (Pascual-Hortal and 
-  Saura 2006). Higher CCP implies higher connectivity. Threshold dependent, 
+  Saura, 2006). Higher CCP implies higher connectivity. Threshold dependent, 
   i.e., maximum distance for two patches to be considered connected, which 
   can be interpreted as the maximum dispersal distance for a certain species. 
   \item LCP – Landscape coincidence probability. It is defined as the 
   probability that two randomly chosen points in the landscape (whether in 
   an habitat patch or not) belong to the same habitat component (or cluster).
-   Ranges between 0 and 1 (Pascual-Hortal and Saura 2006). Threshold 
+   Ranges between 0 and 1 (Pascual-Hortal and Saura, 2006). Threshold 
    dependent, i.e., maximum distance for two patches to be considered 
    connected, which can be interpreted as the maximum dispersal distance for a certain species.
   \item CPL – Characteristic path length. Mean of all the shortest paths 
@@ -104,12 +104,6 @@ Minor, E. S., and Urban, D. L. (2008). A Graph-Theory Framework for Evaluating L
 O'Brien, D., Manseau, M., Fall, A., and Fortin, M. J. (2006). Testing the importance of spatial configuration of winter habitat for woodland caribou: an application of graph theory. Biological Conservation, 130(1): 70-83.
 
 Pascual-Hortal, L., and Saura, S. (2006). Comparison and development of new graph-based landscape connectivity indices: towards the priorization of habitat patches and corridors for conservation. Landscape Ecology, 21(7): 959-967.
-
-Saura, S., and Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: comparison with existing indices and application to a case study. Landscape and Urban Planning, 83(2): 91-103.
-
-Saura, S., Estreguil, C., Mouton, C. & Rodriguez-Freire, M. (2011a). Network analysis to assess landscape connectivity trends: application to European forests (1990-2000). Ecological Indicators 11: 407-416.
-
-Saura, S., Gonzalez-Avila, S. & Elena-Rossello, R. (2011b). Evaluacion de los cambios en la conectividad de los bosques: el indice del area conexa equivalente y su aplicacion a los bosques de Castilla y Leon. Montes, Revista de Âmbito Forestal 106: 15-21
 
 Urban, D., and Keitt, T. (2001). Landscape connectivity: a graph-theoretic perspective. Ecology, 82(5): 1205-1218.
 }
