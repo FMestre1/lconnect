@@ -15,7 +15,7 @@ Description: Provides functions to upload vectorial data and derive landscape
     expected cluster size, area-weighted flux and integral index of connectivity.
     Pascual-Hortal, L., and Saura, S. (2006) <doi:10.1007/s10980-006-0013-z>
     Urban, D., and Keitt, T. (2001) <doi:10.2307/2679983>
-    Laita, A., Kotiaho, J., Monkkonen, M. (2011) <doi:1007/s10980-011-9620-4>.
+    Laita, A., Kotiaho, J., Monkkonen, M. (2011) <doi:10.1007/s10980-011-9620-4>.
 Depends: R (>= 3.4.0)
 License: GPL-3
 Encoding: UTF-8
