@@ -171,8 +171,8 @@ con_metric <- function(landscape, metric) {
   if ("AWF" %in% metric) {
     k <- -log(0.5) / (max_dist / 2)
     out <- matrix(NA, nrow = length(area_c), ncol = length(area_c))
-    for (i in seq_len(area_c)) {
-      for (j in seq_len(area_c)) {
+    for (i in seq(area_c)) {
+      for (j in seq(area_c)) {
         prob <- exp(-k * (as.matrix(distance)[i, j])) * area_c[i] * area_c[j]
         out[i, j] <- prob
       }
