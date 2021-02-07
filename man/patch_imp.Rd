@@ -31,7 +31,7 @@ Each patch is removed at a time and connectivity
 metrics are recalculated without that specific patch. Patch importance value
 indicates the percentage of reduction in the connectivity metric that the 
 loss of that patch represents in the landscape. The current version only 
-allows the use of IIC.
+allows the use of IIC or AWF.
 }
 \examples{
 vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")

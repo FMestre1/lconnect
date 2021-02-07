@@ -16,7 +16,7 @@
 #' metrics are recalculated without that specific patch. Patch importance value
 #' indicates the percentage of reduction in the connectivity metric that the 
 #' loss of that patch represents in the landscape. The current version only 
-#' allows the use of IIC.
+#' allows the use of IIC or AWF.
 #' @references Saura, S., Pascual-Hortal, L. (2007). A new habitat 
 #' availability index to integrate connectivity in landscape conservation planning: 
 #' Comparison with existing indices and application to a case study. Landscape and
@@ -35,8 +35,8 @@ patch_imp <- function(landscape, metric, vector_out = FALSE) {
     stop(paste0("Landscape must be an object of class 'lconnect'"),
          call. = FALSE)
   }
-  if (metric != "IIC") {
-    stop(paste0("The argument 'metric' must be 'IIC'"),
+ if(!all(metric %in% c("AWF", "IIC"))) {
+    stop(paste0("The argument 'metric' must be 'IIC' or 'AWF"),
          call. = FALSE)
   }
   if (!is.logical(vector_out)) {
