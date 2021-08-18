@@ -91,7 +91,7 @@ con_metric <- function(landscape, metric) {
          call. = FALSE)
   }
   if (!all(metric %in% c("NC", "LNK", "SLC", "MSC", "CCP", "LCP", "CPL",
-                       "ECS", "AWF", "IIC"))){
+                       "ECS", "AWF", "IIC", "PC"))){
     stop("Argument metric must be one or more of: 'NC', 'LNK', 'SLC', 'MSC', 'CCP',
 'LCP', 'CPL', 'ECS', 'AWF' or 'IIC'", call. = FALSE)
   }
@@ -197,5 +197,33 @@ con_metric <- function(landscape, metric) {
     out[is.na(out)] <- 0
     result <- c(result, IIC = sum(out) / (area_l ^ 2))
   }
+  if ("PC" %in% metric)  {
+    
+    #d1 <- upper.tri(as.matrix(distance)) * as.matrix(distance)
+    #d1[d1 == 0] <- NA
+    #e1 <- as.data.frame(which(d1 < max_dist, arr.ind = TRUE, useNames = FALSE))
+    #g1 <- igraph::graph_from_data_frame(e1, directed = FALSE)
+    #short_p <- igraph::shortest.paths(g1)
+    #out <- matrix(NA, nrow = length(area_c), ncol = length(area_c))
+    #for (i in as.numeric(row.names(short_p))) {
+    #  for (j in as.numeric(row.names(short_p))) {
+
+        #HERE        
+        
+      #  prob <- (area_c[i] * area_c[j]) * pij2
+      #  out[i, j] <- prob
+    #  }
+ #   }
+        
+        
+    
+        
+    
+    
+
+    
+    
+  }
+  
   return(round(result, 5))
 }
