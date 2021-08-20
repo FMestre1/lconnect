@@ -3,7 +3,10 @@
 #' to overall connectivity. 
 #' @param landscape Object of class "lconnect" created by \code{\link{upload_land}}.
 #' @param metric String indicating the connectivity metric to use in the 
-#' prioritization.
+#' prioritization (currently only "IIC", "AWF" and "PC" are implemented).
+#' @param decompose TRUE/FALSE if TRUE, the metric to evaluate patch 
+#' prioritization (dIIC, dAWF or dPC) is decomposed into dIntra, dFlux and
+#' dConenctor. See Saura and Rubio (2010) for further details. 
 #' @param vector_out TRUE/FALSE indicating if the resulting spatial object 
 #' should be recorded to file.
 #' @usage patch_imp(landscape, metric, vector_out = FALSE)
@@ -21,6 +24,9 @@
 #' availability index to integrate connectivity in landscape conservation planning: 
 #' Comparison with existing indices and application to a case study. Landscape and
 #' Urban Planning, 83(2-3):91-103.
+#' @references Saura, S., Rubio, L. (2010). A common currency for the different ways
+#' in which patches and links can contribute to habitat availability and connectivity
+#' in the landscape. Ecography, 33: 523-537.
 #' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
 #' landscape <- upload_land(vec_path, bound_path = NULL,
 #'                         habitat = 1, max_dist = 500)
@@ -30,25 +36,25 @@
 #' @author Bruno Silva
 #' @export
 #' @exportClass lconnect
-patch_imp <- function(landscape, metric, vector_out = FALSE) {
+patch_imp <- function (landscape, metric, decompose = FALSE, vector_out = FALSE, beta1 = NULL) {
   if (!is.lconnect(landscape)) {
     stop(paste0("Landscape must be an object of class 'lconnect'"),
          call. = FALSE)
   }
- if(!all(metric %in% c("AWF", "IIC"))) {
-    stop(paste0("The argument 'metric' must be 'IIC' or 'AWF"),
+ if(!all(metric %in% c("AWF", "IIC", "PC"))) {
+    stop(paste0("The argument 'metric' must be 'IIC', 'AWF' or 'PC'"),
          call. = FALSE)
   }
   if (!is.logical(vector_out)) {
     stop(paste0("The argument 'vector_out' must be logical (TRUE/FALSE)"),
          call. = FALSE)
   }
-  full_conn <- con_metric(landscape, metric)
+  full_conn <- con_metric(landscape, metric, beta1)
   npatch <- length(landscape$landscape$geometry)
   dconn <- rep(NA, npatch)
   for (i in 1:npatch) {
     land1 <- remove_patch(landscape, i)
-    partial_conn <- as.numeric(con_metric(landscape = land1, metric))
+    partial_conn <- as.numeric(con_metric(landscape = land1, metric, beta1))
     dconn[i] <- 100 * ( (full_conn - partial_conn) / full_conn )
   }
   landscape$landscape$attributes <- dconn
@@ -60,6 +66,6 @@ patch_imp <- function(landscape, metric, vector_out = FALSE) {
   }
   result <- list(landscape = landscape$landscape, prioritization = dconn)
   class(result) <- "pimp"
-  print(dconn)
+  print(round(dconn, 3))
   return(result)
 }

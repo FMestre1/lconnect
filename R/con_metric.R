@@ -3,7 +3,11 @@
 #' @param landscape Object of class 'lconnect' created by \code{\link{upload_land}}.
 #' @param metric Character vector of landscape metrics to be computed. Can be one or more of
 #' the metrics currently available: "NC", "LNK", "SLC", "MSC", "CCP", "LCP",
-#' "CPL", "ECS", "AWF" and "IIC".  
+#' "CPL", "ECS", "AWF", "IIC"n and "PC".
+#' @param beta1 Parameter to be used only if metric = 'PC'. This parameter 
+#' controls the kurtosis (or 'tail fatness') in the dispersal kernel. 
+#' B=1 is a negative exponential, B<1 produces "fat-tailed kernels" 
+#' (leptocurtic), B>1 produces "thin tailed kernels".
 #' @usage con_metric(landscape, metric)
 #' @return Numeric vector with the landscape connectivity metrics selected.
 #' @examples vec_path <- system.file("extdata/vec_projected.shp", package = "lconnect")
@@ -74,6 +78,13 @@
 #'   connectivity). Threshold dependent, i.e., maximum distance for two patches 
 #'   to be considered connected, which can be interpreted as the maximum 
 #'   dispersal distance for a certain species.
+#'   \item PC - Probability of connectivity. Probability that two points 
+#'   randomly placed in the landscape are in habitat patches that are 
+#'   connected, given the number of habitat patches and the connection 
+#'   probabilities (pij). Similar to IIC, although assuming probabilistic 
+#'   connections between patches (Saura and Pascual-Hortal 2007). 
+#'   Probability of inter-patch dispersal is computed in the same way 
+#'   as for AWF. Does not depend on any distance threshold (probabilistic).
 #'   }
 #' @references Bunn, A. G., Urban, D. L., and Keitt, T. H. (2000). Landscape connectivity: a conservation application of graph theory. Journal of Environmental Management, 59(4): 265-278.
 #' @references Fall, A., Fortin, M. J., Manseau, M., and O' Brien, D. (2007). Spatial graphs: principles and applications for habitat connectivity. Ecosystems, 10(3): 448-461.
@@ -82,10 +93,11 @@
 #' @references O'Brien, D., Manseau, M., Fall, A., and Fortin, M. J. (2006). Testing the importance of spatial configuration of winter habitat for woodland caribou: an application of graph theory. Biological Conservation, 130(1): 70-83.
 #' @references Pascual-Hortal, L., and Saura, S. (2006). Comparison and development of new graph-based landscape connectivity indices: towards the priorization of habitat patches and corridors for conservation. Landscape Ecology, 21(7): 959-967. 
 #' @references Urban, D., and Keitt, T. (2001). Landscape connectivity: a graph-theoretic perspective. Ecology, 82(5): 1205-1218.
+#' @references Saura, S., and Pascual-Hortal, L. (2007). A new habitat availability index to integrate connectivity in landscape conservation planning: comparison with existing indices and application to a case study. Landscape and Urban Planning, 83(2): 91-103.
 #' @author Frederico Mestre
 #' @author Bruno Silva
 #' @export
-con_metric <- function(landscape, metric) {
+con_metric <- function(landscape, metric, beta1 = NULL) {
   if (class(landscape) != "lconnect") {
     stop("Argument landscape must be an object of class 'lconnect'",
          call. = FALSE)
@@ -93,7 +105,7 @@ con_metric <- function(landscape, metric) {
   if (!all(metric %in% c("NC", "LNK", "SLC", "MSC", "CCP", "LCP", "CPL",
                        "ECS", "AWF", "IIC", "PC"))){
     stop("Argument metric must be one or more of: 'NC', 'LNK', 'SLC', 'MSC', 'CCP',
-'LCP', 'CPL', 'ECS', 'AWF' or 'IIC'", call. = FALSE)
+'LCP', 'CPL', 'ECS', 'AWF', 'IIC' or 'PC'", call. = FALSE)
   }
   aux <- component_calc(landscape$landscape, landscape$distance,
                         landscape$max_dist)
@@ -199,29 +211,37 @@ con_metric <- function(landscape, metric) {
   }
   if ("PC" %in% metric)  {
     
-    #d1 <- upper.tri(as.matrix(distance)) * as.matrix(distance)
-    #d1[d1 == 0] <- NA
-    #e1 <- as.data.frame(which(d1 < max_dist, arr.ind = TRUE, useNames = FALSE))
-    #g1 <- igraph::graph_from_data_frame(e1, directed = FALSE)
-    #short_p <- igraph::shortest.paths(g1)
-    #out <- matrix(NA, nrow = length(area_c), ncol = length(area_c))
-    #for (i in as.numeric(row.names(short_p))) {
-    #  for (j in as.numeric(row.names(short_p))) {
-
-        #HERE        
-        
-      #  prob <- (area_c[i] * area_c[j]) * pij2
-      #  out[i, j] <- prob
-    #  }
- #   }
-        
-        
+    d1 <- upper.tri(as.matrix(distance)) * as.matrix(distance)
+    d1[d1 == 0] <- NA
+    e1 <- as.data.frame(which(d1 < max_dist, arr.ind = TRUE, useNames = FALSE))
+    dist1 <- NA
+    indd <- which(d1 < max_dist, arr.ind = TRUE, useNames = FALSE)
+    for(i in 1:nrow(indd)){
+      distance2 <- as.matrix(distance)
+      dist1[i] <- distance2[indd[i,1],indd[i,2]]
+    }
+    alfa <- (max_dist*gamma(1/beta1)/gamma(2/beta1))
+    e1$prob_ij <- 1-2*(zipfR::Igamma(1/beta1,(dist1/alfa)^beta1)/(2*gamma(1/beta1)))
+    g1 <- igraph::graph_from_data_frame(e1, directed = FALSE)
+    igraph::E(g1)$weight <- -log(igraph::E(g1)$prob_ij)
+    short_p <- igraph::shortest.paths(g1)
+    pijast <- exp(-short_p)
+    ai_aj_pijast <- pijast
+    i <- 1
+    j <- 1
+    while (i<=igraph::gorder(g1)) 
+    {
+      while (j<=igraph::gorder(g1)) 
+      {
+        ai_aj_pijast[i,j] <- ai_aj_pijast[i,j]*area_c[i]*area_c[j]
+        j <- j+1
+      }
+      j <- 1
+      i <- i+1
+    }
     
-        
-    
-    
-
-    
+    PCnum <- sum(ai_aj_pijast)
+    result <- c(result, PC = PCnum / (area_l ^ 2))
     
   }
   
