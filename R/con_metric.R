@@ -223,22 +223,43 @@ con_metric <- function(landscape, metric, beta1 = NULL) {
     alfa <- (max_dist*gamma(1/beta1)/gamma(2/beta1))
     e1$prob_ij <- 1-2*(zipfR::Igamma(1/beta1,(dist1/alfa)^beta1)/(2*gamma(1/beta1)))
     g1 <- igraph::graph_from_data_frame(e1, directed = FALSE)
-    igraph::E(g1)$weight <- -log(igraph::E(g1)$prob_ij)
-    short_p <- igraph::shortest.paths(g1)
-    pijast <- exp(-short_p)
-    ai_aj_pijast <- pijast
-    i <- 1
-    j <- 1
-    while (i<=igraph::gorder(g1)) 
-    {
-      while (j<=igraph::gorder(g1)) 
-      {
-        ai_aj_pijast[i,j] <- ai_aj_pijast[i,j]*area_c[i]*area_c[j]
-        j <- j+1
+    #
+    n = length(igraph::V(g1))
+    edg = igraph::get.edge.attribute(g1)
+    #edg <- edg$prob_ij
+    x1 = igraph::distances(g1, weight=-log(edg$prob_ij), algorithm='dijkstra')
+    max_product_paths <- exp(-x1)
+
+    n = length(igraph::V(g1))
+    pc = 0
+    
+    for(i in 1:n){
+      for(j in 1:n){
+        pc = pc + area_c[i]*area_c[j]*max_product_paths[i,j]
       }
-      j <- 1
-      i <- i+1
     }
+    
+    out1 <- pc / (area_l^2)
+    result <- c(result, PC = out1)
+    
+        
+    
+#    igraph::E(g1)$weight <- -log(igraph::E(g1)$prob_ij)
+#    short_p <- igraph::shortest.paths(g1)
+#    pijast <- exp(-short_p)
+#    ai_aj_pijast <- pijast
+#    i <- 1
+#    j <- 1
+#    while (i<=igraph::gorder(g1)) 
+#    {
+#      while (j<=igraph::gorder(g1)) 
+#      {
+#        ai_aj_pijast[i,j] <- ai_aj_pijast[i,j]*area_c[i]*area_c[j]
+#        j <- j+1
+#      }
+#      j <- 1
+#     i <- i+1
+#    }
     
     PCnum <- sum(ai_aj_pijast)
     result <- c(result, PC = PCnum / (area_l ^ 2))
