@@ -36,7 +36,7 @@
 #' @author Bruno Silva
 #' @export
 #' @exportClass lconnect
-patch_imp <- function (landscape, metric, decompose = FALSE, vector_out = FALSE, beta1 = NULL) {
+patch_imp <- function (landscape, metric, vector_out = FALSE, beta1 = NULL) {
   if (!is.lconnect(landscape)) {
     stop(paste0("Landscape must be an object of class 'lconnect'"),
          call. = FALSE)
