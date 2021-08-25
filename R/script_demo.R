@@ -15,3 +15,7 @@ importance3 <- patch_imp(landscape, metric = "IIC")
 plot(importance)
 plot(importance2)
 plot(importance3)
+
+
+
+
