@@ -6,8 +6,8 @@
 #' \code{\link[sf]{plot.sf}}.
 #' @param main String with plot title.
 #' @return Patch importance plot.
-#' @method plot pimp
 #' @S3method plot pimp
+#' @method plot pimp
 #' @author Bruno Silva
 #' @author Frederico Mestre
 #' @details Plot patch importance with percentage value per patch. This value

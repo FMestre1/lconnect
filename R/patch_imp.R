@@ -29,7 +29,7 @@
 #' @author Frederico Mestre
 #' @author Bruno Silva
 #' @export
-#' @exportClass lconnect
+#' @exportClass pimp
 patch_imp <- function(landscape, metric, vector_out = FALSE) {
   if (!is.lconnect(landscape)) {
     stop(paste0("Landscape must be an object of class 'lconnect'"),
