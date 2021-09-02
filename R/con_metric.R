@@ -197,5 +197,5 @@ con_metric <- function(landscape, metric) {
     out[is.na(out)] <- 0
     result <- c(result, IIC = sum(out) / (area_l ^ 2))
   }
-  return(round(result, 5))
+  return(result)
 }
