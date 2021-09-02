@@ -11,5 +11,6 @@ remove_patch <- function(object, patch) {
                  clusters = aux$clusters, distance = distance,
                  boundary = l1$boundary, area_l = area_l)
   class(object) <- "lconnect"
+  
   return(object)
 }
