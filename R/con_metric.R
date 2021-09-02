@@ -224,14 +224,14 @@ con_metric <- function(landscape, metric, beta1 = NULL) {
     e1$prob_ij <- 1-2*(zipfR::Igamma(1/beta1,(dist1/alfa)^beta1)/(2*gamma(1/beta1)))
     g1 <- igraph::graph_from_data_frame(e1, directed = FALSE)
     #
-    n = length(igraph::V(g1))
-    edg = igraph::get.edge.attribute(g1)
+    n <- length(igraph::V(g1))
+    edg <- igraph::get.edge.attribute(g1)
     #edg <- edg$prob_ij
-    x1 = igraph::distances(g1, weight=-log(edg$prob_ij), algorithm='dijkstra')
+    x1 <- igraph::distances(g1, weight=-log(edg$prob_ij), algorithm='dijkstra')
     max_product_paths <- exp(-x1)
 
-    n = length(igraph::V(g1))
-    pc = 0
+    n <- length(igraph::V(g1))
+    pc <- 0
     
     for(i in 1:n){
       for(j in 1:n){
@@ -261,8 +261,8 @@ con_metric <- function(landscape, metric, beta1 = NULL) {
 #     i <- i+1
 #    }
     
-    PCnum <- sum(ai_aj_pijast)
-    result <- c(result, PC = PCnum / (area_l ^ 2))
+    #PCnum <- sum(ai_aj_pijast)
+    #result <- c(result, PC = PCnum / (area_l ^ 2))
     
   }
   
