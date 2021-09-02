@@ -37,8 +37,5 @@ plot(importance3)
 
 decompose_PC <- function(landscape, beta1){
   
-
-  
-  
 }
 
