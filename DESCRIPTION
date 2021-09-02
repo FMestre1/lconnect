@@ -1,6 +1,6 @@
 Package: lconnect
 Title: Simple Tools to Compute Landscape Connectivity Metrics
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person("Frederico", "Mestre", email = "mestre.frederico@gmail.com", role = c("aut","cre")),
     person("Bruno", "Silva", email = "bmsasilva@gmail.com", role = "aut"),

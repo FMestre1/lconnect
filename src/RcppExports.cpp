@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // IICRcpp
 NumericMatrix IICRcpp(NumericVector x, NumericVector area_c, NumericVector names, NumericMatrix short_p);
 RcppExport SEXP _lconnect_IICRcpp(SEXP xSEXP, SEXP area_cSEXP, SEXP namesSEXP, SEXP short_pSEXP) {
