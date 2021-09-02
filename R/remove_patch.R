@@ -7,7 +7,7 @@ remove_patch <- function(object, patch) {
   distance <- stats::as.dist(distance)
   aux <- component_calc(landscape, distance, l1$max_dist)
   landscape <- suppressWarnings(sf::st_sf(clusters = aux$clusters, geometry = landscape))
-  object <- list(landscape = landscape, max_dist = max_dist,
+  object <- list(landscape = landscape, max_dist = l1$max_dist,
                  clusters = aux$clusters, distance = distance,
                  boundary = l1$boundary, area_l = area_l)
   class(object) <- "lconnect"
