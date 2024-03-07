@@ -1,6 +1,6 @@
 Package: lconnect
 Title: Simple Tools to Compute Landscape Connectivity Metrics
-Version: 0.1.3
+Version: 0.1.2
 Authors@R: c(
     person("Frederico", "Mestre", email = "mestre.frederico@gmail.com", role = c("aut","cre")),
     person("Bruno", "Silva", email = "bmsasilva@gmail.com", role = "aut"),
@@ -20,7 +20,7 @@ Description: Provides functions to upload vectorial data and derive landscape
 Depends: R (>= 3.4.0)
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 LinkingTo: Rcpp
 Imports: 
     sf,
