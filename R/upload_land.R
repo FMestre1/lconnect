@@ -47,7 +47,7 @@ upload_land <- function(land_path, bound_path = NULL, habitat, max_dist = NULL){
          call. = FALSE)
   }
   if (is.character(bound_path)) {
-    if (!utils::file_test(bound_path)) {
+    if (!utils::file_test("-f", bound_path)) {
       stop(paste0("Argument 'bound_path' doesn't seem to be a valid file"),
            call. = FALSE)
     }

@@ -15,6 +15,15 @@
 #' @author Frederico Mestre
 plot.lconnect <- function(x, ...){
   x$landscape$clusters <- as.factor(x$landscape$clusters)
+  # xmin <- sf::st_bbox(x$landscape)[1]
+  # xmax <- sf::st_bbox(x$landscape)[3]
+  # ymin <- sf::st_bbox(x$landscape)[2]
+  # ymax <- sf::st_bbox(x$landscape)[4]
+  # xlim <- c(xmin, xmax)
+  # ylim <- c(ymin, ymax)
+  # print(xlim)
+  # print(ylim)
   graphics::plot(x$landscape,  key.pos = NULL, border = NA, reset = F, ...)
-  graphics::plot(x$boundary,  add = T, border = "grey", ...)
+  graphics::plot(x$boundary,  add = T, col = scales::alpha("white", alpha = 0),
+                 border = "grey", ...)
 }
