@@ -6,7 +6,7 @@
 #' \code{\link[sf]{plot.sf}}.
 #' @param main String with plot title.
 #' @return Patch importance plot.
-#' @S3method plot pimp
+#' @exportS3Method plot pimp
 #' @method plot pimp
 #' @author Bruno Silva
 #' @author Frederico Mestre

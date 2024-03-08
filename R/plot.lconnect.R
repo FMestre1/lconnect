@@ -10,7 +10,7 @@
 #' @return Plot depicting patches and cluster membership (distinct colours per 
 #' cluster).
 #' @method plot lconnect
-#' @S3method plot lconnect
+#' @exportS3Method plot lconnect
 #' @author Bruno Silva
 #' @author Frederico Mestre
 plot.lconnect <- function(x, ...){
