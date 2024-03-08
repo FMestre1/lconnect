@@ -1,9 +1,10 @@
 Package: lconnect
 Title: Simple Tools to Compute Landscape Connectivity Metrics
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person("Frederico", "Mestre", email = "mestre.frederico@gmail.com", role = c("aut","cre")),
-    person("Bruno", "Silva", email = "bmsasilva@gmail.com", role = "aut"))
+    person("Bruno", "Silva", email = "bmsasilva@gmail.com", role = "aut"),
+    person("Benjamin", "Branoff", email = "branoff.benjamin@epa.gov", role = "ctb"))
 Description: Provides functions to upload vectorial data and derive landscape
     connectivity metrics in habitat or matrix systems. Additionally, includes an 
     approach to assess individual patch contribution to the overall landscape 
@@ -19,10 +20,12 @@ Description: Provides functions to upload vectorial data and derive landscape
 Depends: R (>= 3.4.0)
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
+LazyData: false
+LinkingTo: Rcpp
 Imports: 
     sf,
-    igraph
+    igraph,
+    Rcpp,
+    methods
 BugReports: https://github.com/FMestre1/lconnect/issues
-RoxygenNote: 6.1.1
-
+RoxygenNote: 7.1.1

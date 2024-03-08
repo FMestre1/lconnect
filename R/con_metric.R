@@ -82,8 +82,11 @@
 #' @references O'Brien, D., Manseau, M., Fall, A., and Fortin, M. J. (2006). Testing the importance of spatial configuration of winter habitat for woodland caribou: an application of graph theory. Biological Conservation, 130(1): 70-83.
 #' @references Pascual-Hortal, L., and Saura, S. (2006). Comparison and development of new graph-based landscape connectivity indices: towards the priorization of habitat patches and corridors for conservation. Landscape Ecology, 21(7): 959-967. 
 #' @references Urban, D., and Keitt, T. (2001). Landscape connectivity: a graph-theoretic perspective. Ecology, 82(5): 1205-1218.
+#' @useDynLib lconnect
+#' @importFrom Rcpp sourceCpp
 #' @author Frederico Mestre
 #' @author Bruno Silva
+#' @author Benjamin Branoff
 #' @export
 con_metric <- function(landscape, metric) {
   if (class(landscape) != "lconnect") {
@@ -187,15 +190,9 @@ con_metric <- function(landscape, metric) {
     g1 <- igraph::graph_from_data_frame(e1, directed = FALSE)
     short_p <- igraph::shortest.paths(g1)
     out <- matrix(NA, nrow = length(area_c), ncol = length(area_c))
-    for (i in as.numeric(row.names(short_p))) {
-      for (j in as.numeric(row.names(short_p))) {
-        nij <- short_p[as.character(i), as.character(j)]
-        prob <- (area_c[i] * area_c[j]) / (1 + nij)
-        out[i, j] <- prob
-      }
-    }
+    out <-IICRcpp(out[1,], area_c, as.numeric(row.names(short_p))-1, short_p)
     out[is.na(out)] <- 0
     result <- c(result, IIC = sum(out) / (area_l ^ 2))
   }
-  return(round(result, 5))
+  return(result)
 }
