@@ -26,7 +26,6 @@ Imports:
     sf,
     igraph,
     Rcpp,
-    methods,
     scales
 BugReports: https://github.com/FMestre1/lconnect/issues
 RoxygenNote: 7.1.2

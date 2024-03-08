@@ -32,7 +32,7 @@
 #' @author Bruno Silva
 #' @author Frederico Mestre
 #' @export
-#' @exportClass lconnect
+
 upload_land <- function(land_path, bound_path = NULL, habitat, max_dist = NULL){
   if (!is.character(land_path)) {
     stop(paste0("Argument 'land_path' must be a string"),
