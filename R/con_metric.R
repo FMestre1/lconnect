@@ -89,7 +89,7 @@
 #' @author Benjamin Branoff
 #' @export
 con_metric <- function(landscape, metric) {
-  if (class(landscape) != "lconnect") {
+  if (is(landscape) != "lconnect") {
     stop("Argument landscape must be an object of class 'lconnect'",
          call. = FALSE)
   }
